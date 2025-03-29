@@ -1,7 +1,15 @@
-## TNOCreator
-啥被高中牲写的TNO自定义事件生成器
+## CreativeTFR
+有人说 要有我们 TFR 自己的 TNOCreator
 
-基于vanilla javascript，服务端使用NodeJS，数据库基于sqlite3
+于是 HittyGubby 就创造了 CreativeTFR
+
+（我才不承认是因为TNOC做的依托，而且加个Creator在后面比较奇怪所以提前了）
+
+基于vanilla javascript，服务端使用NodeJS，数据库基于sqlite3（暂时的）
+
+**（后面的文档还没写完 再说了似乎也不需要这个）**
+
+放心 高考前能refactor的差不多 至于能不能做个像样的宣传我不到啊（
 
 ### 安装
 
