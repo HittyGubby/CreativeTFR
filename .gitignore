@@ -1,0 +1,4 @@
+node_modules
+data/user.db
+data/upload.db
+data/data.db
