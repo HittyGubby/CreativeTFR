@@ -20,7 +20,7 @@ window.onload = function(){
 
     //init input data
     document.getElementById("focusproginput").value = Math.round(Number(document.getElementById("progressbar").style.width.replace("px",""))/237*100);
-    const values = [90, 0, 0, 5.6, 30.6, 41.7, 11.1, 8.3, 2.1, 0, 0, 2, 1.4, 0];
+    const values = [271,0,1,3,8,40,5,42,1,0,0,0];
     const c = document.getElementById("poplist").children;
     for (let i=0; i<values.length; i++) {c[3*i+1].value=values[i];}
     updatepop();
@@ -251,7 +251,7 @@ function savejson(){
 }
 
 function returnjson(){
-  const o = {
+  return {
     basics: fetchdata('basics','input'),
     data: fetcharr(),
     focusprog: document.getElementById("focusproginput").value,
@@ -281,10 +281,8 @@ function returnjson(){
       newswindow: fetchifcheck('checkboxnewswindow'),
       superwindow: fetchifcheck('checkboxsuperwindow'),
     },
-    lang: lang,
     background: document.body.style.backgroundColor
   }
-  return o;
 }
 
 function jsonupdate(jsonData){
@@ -312,9 +310,6 @@ function jsonupdate(jsonData){
      document.getElementById(`checkbox${e}`).style.background = "url('template/generic_checkbox_checked.png') no-repeat";}
    else {document.getElementById(e).style.display="none";
      document.getElementById(`checkbox${e}`).style.background = "url('template/generic_checkbox_unchecked.png') no-repeat";}}
- document.getElementById("lang").innerHTML = jsonData.lang;
- if (jsonData.lang == "中文") langchtocn();
- else langchtoen();
   updatepop();
   updatetrig('basics', 'input');
   updatetrig('description', 'input');
@@ -398,13 +393,12 @@ function updatepop() {
     let scaledAngles = cumulativeAngles.map(angle => angle * scaleFactor);
     document.getElementById("piechart").style.background = `conic-gradient(
     from ${a[1]}deg, 
-      rgb(18, 184, 0) 0 ${scaledAngles[0]}deg,rgb(52, 25, 80) 0 ${scaledAngles[1]}deg,
-      rgb(35, 35, 35) 0 ${scaledAngles[2]}deg,rgb(80, 50, 0) 0 ${scaledAngles[3]}deg,
-      rgb(132, 50, 0) 0 ${scaledAngles[4]}deg,rgb(75, 75, 75) 0 ${scaledAngles[5]}deg,
-      rgb(130, 130, 130) 0 ${scaledAngles[6]}deg,rgb(0, 0, 135) 0 ${scaledAngles[7]}deg,
-      rgb(39, 49, 149) 0 ${scaledAngles[8]}deg,
-      rgb(78, 97, 163) 0 ${scaledAngles[9]}deg,rgb(169, 27, 79) 0 ${scaledAngles[10]}deg,
-      rgb(155, 0, 0) 0 ${scaledAngles[11]}deg,rgb(110, 0, 0) 0 ${scaledAngles[12]}deg)`;
+      rgb(100,0,0) 0 ${scaledAngles[0]}deg,rgb(153,0,0) 0 ${scaledAngles[1]}deg,
+      rgb(189,54,67) 0 ${scaledAngles[2]}deg,rgb(255,10,102) 0 ${scaledAngles[3]}deg,
+      rgb(255,170,30) 0 ${scaledAngles[4]}deg,rgb(225,215,0) 0 ${scaledAngles[5]}deg,
+      rgb(10,15,255) 0 ${scaledAngles[6]}deg,rgb(124,124,124) 0 ${scaledAngles[7]}deg,
+      rgb(5,5,5) 0 ${scaledAngles[8]}deg,
+      rgb(123,84,46) 0 ${scaledAngles[9]}deg,rgb(78,57,57) 0 ${scaledAngles[10]}deg`;
 }
 
 function update(input) {
@@ -466,26 +460,6 @@ function check(c){
   } 
 }
 
-let lang="中文"
-function langchange(){
-  document.getElementById("lang").innerHTML == "English" ? langchtocn() : langchtoen();
-  document.getElementById("sfxcheck").play();
-}
-function langchtocn(){
-    document.getElementById("lang").innerHTML = "中文";
-    //document.getElementById("leaderofen").style.display = "none";
-    //document.getElementById("leaderofcn").style.display = "";
-    document.getElementById("economyen").style.display = "none";
-    document.getElementById("economycn").style.display = "";
-    lang="中文";}
-function langchtoen(){
-    document.getElementById("lang").innerHTML = "English";
-    //document.getElementById("leaderofen").style.display = "";
-    //document.getElementById("leaderofcn").style.display = "none";
-    document.getElementById("economyen").style.display = "";
-    document.getElementById("economycn").style.display = "none";
-    lang="English";}
-
 var shared=false;
 var queryshared=false;
 function checkshare(){
@@ -512,7 +486,7 @@ function checkqueryshare(){
 }
 
 function genpiccontainer(){
-  const elements = ['flag', 'portrait', 'ideology', 'faction', 'focus', 'econ', 'econsub', 'super', 'news', 'header'];
+  const elements = ['flag', 'portrait', 'ideology', 'faction', 'focus', 'super', 'news'];
   elements.forEach(id => {
     const div = document.createElement('div');
     div.id = id;
@@ -633,14 +607,14 @@ function genpiccontainer(){
     document.getElementById('piccontainer').appendChild(div);
   });
   const col = document.getElementsByClassName('queryuserinput')
-  const ph=['任意分辨率','长宽比 3:4','大约 68x68','大约 75x75','大约 100x80','大约 60x60','大约 50x50','590x404','162x420','480x70']
-  for(let i=0;i<=9;i++){col[i].placeholder = ph[i]}
+  const ph=['任意分辨率','长宽比 3:4','大约 68x68','大约 75x75','大约 100x80','590x404','162x420']
+  for(let i=0;i<=6;i++){col[i].placeholder = ph[i]}
   const spancn = document.getElementsByClassName('spancn')
-  const spancne=['国旗：','领导人：','意识形态：','阵营：','国策：','经济：','亚经济','超事件：','新闻：','新闻页眉：']
-  for(let i=0;i<=9;i++){spancn[i].innerHTML = spancne[i]}
+  const spancne=['国旗：','领导人：','意识形态：','阵营：','国策：','超事件：','新闻：']
+  for(let i=0;i<=6;i++){spancn[i].innerHTML = spancne[i]}
   const querycn = document.getElementsByClassName('queryinput')
-  const querycne=['搜索国旗：','搜索领导人：','搜索意识形态：','搜索阵营：','搜索国策：','搜索经济：','搜索亚经济','搜索超事件：','搜索新闻：','搜索新闻页眉：']
-  for(let i=0;i<=9;i++){querycn[i].placeholder = querycne[i]}
+  const querycne=['搜索国旗：','搜索领导人：','搜索意识形态：','搜索阵营：','搜索国策：','搜索超事件：','搜索新闻：']
+  for(let i=0;i<=6;i++){querycn[i].placeholder = querycne[i]}
 }
 
 function uploadasset(ele) {
