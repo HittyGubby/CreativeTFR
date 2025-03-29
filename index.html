@@ -20,36 +20,39 @@
     </script>
     <link rel="stylesheet" href="js/jquery-ui.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="preload" as="font" href="/fonts/BOMBARD_.ttf" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/fonts/Aldrich-Regular.ttf" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/fonts/FZRuiZHJW.ttf" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/fonts/OldTyperNr.ttf" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/fonts/FZWH.TTF" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/Cubic.ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/FZRui.ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/fusion.ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/kenyancoffee.ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/electrolize.ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/huangyouti.ttf" crossorigin="anonymous">
+
 </head>
-<body style="background-color:rgb(51, 51, 51)">
+<body style="background-color:rgb(11, 0, 18)">
 <div id="main" style="user-select: none; position:absolute;z-index: 8;">
     <div>
-        <img src="template/diplo_leader_frame.png" style="position: relative;z-index: 1;">
+        <img src="template/diplo_leader_frame.png" style="position: relative;z-index: 1;top:70px">
         <div style="position:absolute; top: 15px; left: 22px; height: 55px; width: 90px; z-index: 2;">
-           <img src="template/flag_overlay.png" style="position:absolute; top:0; left:0;z-index: 1;height: inherit; width: inherit; opacity: 95%;">
-           <img id="flagpic" class="pic" src="preset/GER.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
+           <img src="template/flag_overlay.png" style="position:absolute; top:0; left:0;z-index: 1;height: inherit; width: inherit; scale: 1.3;">
+           <img id="flagpic" class="pic" src="preset/USA.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
         </div>
         <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">
             <img src="template/Leader_Background.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
         </div>
         <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">
-            <img id="portraitpic" class="pic" src="preset/Portrait_GER_Reichstag_Emergency_Council.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
+            <img id="portraitpic" class="pic" src="preset/USA_donald_trump5.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
         </div>
         
     </div>
 
     <div>
         <img src="template/diplo_upper_win_bg.png" style="position: absolute;z-index: 2; left: 125px; top: 4px;">
+        <img src="template/diplo_top_bg_diplo_tab.png" style="position: absolute;z-index: 2; left: 125px; top: 76px;">
         <div style="position:absolute; top: 42px; left: 177px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
-            <img id="ideologypic" class="pic" src="preset/national_socialism_group.png" style="position:absolute;">
+            <img id="ideologypic" class="pic" src="preset/right_populism_USA.png" style="position:absolute;">
         </div>
-        <div style="position:absolute; top: 42px; left: 488px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
-            <img id="factionpic" class="pic" src="preset/Leader-Einheitspakt.png" style="position:absolute;scale: 0.7;">
+        <div style="position:absolute; top: 40px; left: 485px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
+            <img id="factionpic" class="pic" src="preset/GFX_NATO_Member.png" style="position:absolute;">
         </div>
         <div style="position:absolute; top: 220px; left: 373px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
             <img src="template/pol_goal_progress_frame.png" style="position:absolute;">
@@ -58,32 +61,32 @@
         <div style="position:absolute; top: 217px; left: 255px; z-index: 3;" >
             <img id="progressbar" src="template/pol_goal_progress.png" style="position:absolute; width: 0px;height: 6px;">
         </div>
-        <div style="position:absolute; top: 202px; left: 178px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
+        <div style="position:absolute; top: 202px; left: 182px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
             <img id="focuspic" class="pic" src="preset/goal_unknown.png" style="position:absolute;scale: 0.9;">
         </div>
-        <div id="piechartparent" style="position:absolute; top: 74px; left: 128px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
+        <div id="piechartparent" style="position:absolute; top: 72px; left: 133px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
             <img src="template/bck_shadow.png" style="position:absolute;scale: 0.6;z-index: 0;">
             <div id="piechart" style="width: 100px;height: 100px; border-radius: 50%;background:none; scale: 0.6;z-index: 4;"></div>
-            <img src="template/pol_piechart_overlay_63x63.png" style="position:absolute;scale: 0.45;z-index: 5;">
+            <img src="template/pol_piechart_overlay_63x63.png" style="position:absolute;scale: 0.85;z-index: 5;">
         </div>
-        <div style="z-index: 3;position: absolute; left: 220px; top: 5px; inline-size: 1000px; color: #cccccc;font-family:Bombardier,FZWen; font-size: 20px; vertical-align:middle;">
-            <p id="country" style="position: absolute; top: -10px;">大日耳曼国</p>
-            <p id="factiontext" style="position: absolute; top: 8px;">团结协定</p>
-            <p id="leader" style="position: absolute; top: 27px">国会紧急委员会</p>
+        <div style="z-index: 3;position: absolute; left: 230px; top: 10px; inline-size: 1000px; color: #cccccc;text-shadow: 1px 1px 2px black;font-family:Cubic; font-size: 16px; vertical-align:middle;">
+            <p id="country" style="position: absolute; top: -15px;">美利坚合众国</p>
+            <p id="factiontext" style="position: absolute; top: 5px;">北大西洋公约组织</p>
+            <p id="leader" style="position: absolute; top: 25px">唐纳德·特朗普</p>
         </div>
-        <div style="position: absolute; top:85px;left: 238px; inline-size: 1000px; font-family:Aldrich,FZRui;color: #b2c9c2; font-size: 21px;z-index: 3; vertical-align: middle;">
-            <p id="party" style="position: absolute; top: -10px;">纳粹党</p>
-            <p id="ideologytext" style="position: absolute; top: 15px;">国家社会主义</p>
-            <p id="election" style="position: absolute; top: 40px;">无选举</p>
+        <div style="position: absolute; top:85px;left: 238px; inline-size: 1000px; font-family:Cubic;color: #cccccc; text-shadow: 1px 1px 2px black;font-size: 16px;z-index: 3; vertical-align: middle;">
+            <p id="party" style="position: absolute; top: -9px;">共和党（保守派）</p>
+            <p id="ideologytext" style="position: absolute; top: 12px;">特朗普民粹主义</p>
+            <p id="election" style="position: absolute; top: 34px;">下次大选<span style="color: sandybrown;">2020年 11月<span></p>
             <div style="position:absolute; inline-size: 260px;display: flex; left: 6px; top:112px; justify-content: center; align-items: center;">
-                <p id="focustext" style="position: absolute; text-align: center;">帝国的遗产</p>
+                <p id="focustext" style="position: absolute; text-align: center;">未知国策</p>
             </div>
         </div>
     </div>
 
 </div>
 
-<div class="draggable" id="econ" style=" position: absolute; left: 522px;top: 14px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
+<!--<div class="draggable" id="econ" style=" position: absolute; left: 522px;top: 14px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
         <img src="template/diplo_econ_bg.png" style="position: relative;z-index: 2;margin-left: 7px;">
         <div style="position:absolute; top: 35px; left: 160px; z-index: 3;display: flex; justify-content: center; align-items: center;" >
             <img id="econsubpic" class="pic" src="preset/Gelenkte_Wirtschaft.png" style="position:absolute;">
@@ -92,49 +95,40 @@
             <img id="econpic" class="pic" src="preset/EHP_GER.png" style="position:absolute;">
         </div>
         <div style="position: absolute; left: 23px; top: -5px;">
-        <p id="economyen" style="display: none;font-family:Bombardier,FZWen; font-size: 20px; color:#cccccc; position: absolute; z-index: 3; inline-size: 80px;">Economy</p>
-        <p id="economycn" style="font-family:Bombardier,FZWen; font-size: 20px; color:#cccccc; position: absolute; z-index: 3; inline-size: 80px; top: -2px; ">经济</p>
+        <p id="economyen" style="display: none;font-family:Cubic; font-size: 20px; color:#cccccc; position: absolute; z-index: 3; inline-size: 80px;">Economy</p>
+        <p id="economycn" style="font-family:Cubic; font-size: 20px; color:#cccccc; position: absolute; z-index: 3; inline-size: 80px; top: -2px; ">经济</p>
     </div>
-</div>
+</div>-->
 
 
-<div class="draggable" id="newswindow" style="position: absolute; left: 910px;top: 180px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
+<div class="draggable" id="newswindow" style="position: absolute; left: -30px;top: 550px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
     <img src="template/news/event_news_bg.png" style="position: relative;">
-    <div style="position:absolute;  height: 70px; width:480px;top: 20px; left: 25px;">
-        <img id="headerpic" class="pic" src="preset/nazist-Germany.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
+    <div style="position:absolute;top: 164px; left: 150px;">
+        <img id="newspic" class="pic" src="preset/Tank_Duel.png" style="position:absolute;">
     </div>
-    <div style="position:absolute;position:absolute; height: 420px; width:162px;top: 140px; left: 25px;">
-        <img id="newspic" class="pic" src="preset/GER_german_civil_war.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
+    <button id="newsbutton" onclick="document.getElementById('sfxcheck').play();" style="position:absolute; top: 700px; left: 180px;transition: 0.2s; background: url('template/news/event_option_entry.png') no-repeat; border: none; width: 352px; height: 48px; font-family:electrolize,FZRui;font-size: 17px;color: #ffffff;" onmouseover="this.style.opacity = 0.8" onmouseleave="this.style.opacity = 1">骨肉再次相残。</button>
+    <div style="position:absolute;display: flex; left: 90px; top:120px; justify-content: center; align-items: center; inline-size: 500px;">
+        <p id="newstitle" style="position: absolute;color: #000000; text-align: center; font-family: kenyan,huangyouti; font-size: 28px;">国会拒绝交涉</p>
     </div>
-    <button id="newsbutton" onclick="document.getElementById('sfxcheck').play();" style="position:absolute; top: 500px; left: 163px;transition: 0.2s; background: url('template/news/event_option_entry.png') no-repeat; border: none; width: 352px; height: 52px; font-family:Type;font-size: 15px;color: #000000;" onmouseover="this.style.opacity = 0.8" onmouseleave="this.style.opacity = 1">帝国的终结。</button>
-    <div style="position:absolute;display: flex; left: 10px; top:120px; justify-content: center; align-items: center; inline-size: 500px;">
-        <p id="newstitle" style="position: absolute;color: #000000; text-align: center; font-family: Type; font-size: 20px;">德国内战</p>
-    </div>
-        <span id="newsbody" style="position: absolute;left:195px; top:140px;color: #000000;inline-size: 300px;text-align: left; font-family: Type; font-size: 14px;white-space: pre-line;">在阿道夫·希特勒去世后，德国旋即陷入混乱。尽管元首指定了合法的继任者，但德国国内的强大派系已经开始拿起武器，互相对抗，打算将国家引导向自己的期望。国家已被分裂，整支整支的驻军无视来自日耳曼尼亚的命令，并倒向他们选择的继任者。虽然局势的严重程度尚不清楚，但据估计，德国要么正在面临要么已经经历了中央权威的彻底崩溃。
-            
-虽然还不大清楚德国东部领地的命运将会如何，但日耳曼尼亚与她的殖民领之间突然断绝了联系，这已经引发了这些地区是否也会自行寻找出路的猜测。然而，有一点毫无疑问，这个欧洲巨人的崩溃已经使整个欧陆陷入分崩离析之中。</span>
+        <span id="newsbody" style="font-family: electrolize,FZRui; position: absolute;left:75px; top:330px;color: #000000;inline-size: 560px;text-align: left; font-size: 18px;white-space: pre-line;">或许将被后世称为二十一世纪最悲惨的事件在今日已经撼动了整个美国。丹佛和华盛顿特区的两国政府已经拒绝通过外交谈判和平结束当前的危机，当特朗普和拜登都声称他们是国家合法总统时，伊利诺伊州和印第安纳州边境的临时停火线上的民兵间爆发了零星战斗，拜登的民兵向伊利诺伊州的丹维尔推进，而特朗普的民兵则试图通过接连开火夺取边境城市，熊熊烈焰从芝加哥的大楼上升起。有报道称，丹佛的反战活动家被无标记的面包车强行带下街头；而在路易斯维尔，亲特朗普的抗议活动被联邦军队强行驱散。尽管特朗普政府在维持城市秩序方面遭遇了重大困难，但拜登政府也未将控制区延伸至高速公路和城市之外，地下民兵已经开始着手武装伏击军队车队。千千万万的美国家庭惊恐注视着美国社会结构的彻底粉碎。当同为亲朋骨肉的美国人互相厮杀之时，让人不可置否的现实是，第二次美国内战已经真正打响。</span>
 </div>
 
 
-<div class="draggable" id="superwindow" style="position: absolute; left: 315px;top: 250px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
-    <img src="template/super_frame.png" style="position: relative;width: 600px;z-index: 2;">
-    <div style="position:absolute;position:absolute; width:590px;height:404px;top:52px;left: 5px;">
-        <img id="superpic" class="pic" src="preset/german_civil_war.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
+<div class="draggable" id="superwindow" style="position: absolute; left: 660px;top: 20px; z-index: 4;user-select: none;" onclick="dragElement(this)" ondrag="dragElement(this)">
+    <img src="template/super_frame.png" style="position: relative;z-index: 2;">
+    <div style="position:absolute;position:absolute;top:40px;left: 5px;">
+        <img id="superpic" class="pic" src="preset/super_USA_civil_war.png" style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
     </div>
-    <div style="position:absolute; top: 390px; left: 322px;display: flex; justify-content: center; align-items: center;" >
-        <img src="template/superevent_text_underlay.png" style="position:absolute;">
+    <button id="superbutton" onclick="document.getElementById('sfxcheck').play();" style="position:absolute; top: 585px; left: 350px; transition: 0.2s; background: url('template/spacebar.png') no-repeat; border: none; width: 300px; height: 35px; font-family:Cubic;font-size: 19px;color: #cccccc;z-index: 2;text-shadow: 1px 1px 2px black;" onmouseover="this.style.opacity = 0.8" onmouseleave="this.style.opacity = 1">分裂之家</button>
+    <div style="position:absolute;display: flex; left: 230px; top:37px; justify-content: center; align-items: center; inline-size: 570px;">
+        <p id="supertitle" style="color: white; position: absolute; text-align: center; font-family:Cubic; font-size: 24px;z-index: 2;text-shadow: 1px 1px 2px black;">第二次美国内战</p>
     </div>
-    <button id="superbutton" onclick="document.getElementById('sfxcheck').play();" style="position:absolute; top: 470px; left: 120px; transition: 0.2s; background: url('template/button_359x34.png') no-repeat; border: none; width: 352px; height: 32px; font-family:Bombardier,FZWen;font-size: 19px;color: #cccccc;z-index: 2;  " onmouseover="this.style.opacity = 0.8" onmouseleave="this.style.opacity = 1">风云已起</button>
-    <div style="position:absolute;display: flex; left: 11px; top:27px; justify-content: center; align-items: center; inline-size: 570px;">
-        <p id="supertitle" style="position: absolute;color: #b2c9c2; text-align: center; font-family:Aldrich,FZRui; font-size: 20px;z-index: 2;">德国内战</p>
-    </div>
-        <p id="supermotto" style="position: absolute;right:10px; top:305px;color: #cccccc;inline-size: 520px;text-align: left; font-family: Type; font-size: 22px;font-family:Bombardier,FZWen; text-align: right;white-space: pre-line; letter-spacing: -2px;">因此，所有人都必须认识到这一点：
-与国家的存在相比，他的自我毫无意义。
-- 阿道夫·希特勒</p>
+        <p id="supermotto" style="text-shadow: 1px 1px 2px black; position: absolute;left:210px; top:420px;z-index: 3; color: #cccccc;inline-size: 580px; font-family: Type; font-size: 18px;font-family:Cubic; text-align: center;white-space: pre-line; letter-spacing: -2px;">“如果毁灭是我们的命运，我们必须自己成为它的创造者和终结者。作为一个自由人的国家，我们将永远活着，或者自我灭亡。”
+- 亚伯拉罕·林肯</p>
 </div>
 
 
-<div class="draggable resizable" id="desc" style="font-family:Aldrich,FZRui; font-size: 12px; left: 12px;top: 255px; z-index: 4; line-height: 15px; color:#cccccc;background-color: #000c13;user-select: none; position: absolute; z-index: 3; width: 286px;word-wrap:break-word; height: auto;outline: 1px solid #7caaaa; padding: 7px;min-height:min-content; overflow: hidden;" onclick="dragElement(this)" ondrag="dragElement(this)">
+<div class="draggable resizable" id="desc" style="font-family:Cubic; font-size: 12px; left: 12px;top: 255px; z-index: 4; line-height: 15px; color:#cccccc;background-color: #000c13;user-select: none; position: absolute; z-index: 3; width: 320px;word-wrap:break-word; height: auto;border: 3px solid transparent;border-image: linear-gradient(to right, #3f0081, #992ecf);border-image-slice: 1; padding: 7px;min-height:min-content; overflow: hidden;" onclick="dragElement(this)" ondrag="dragElement(this)">
     <!--<span id="leaderdesc" style="color:#cccc00"></span><br>
     <span id="leaderofen" style="color:#cccccc;display: none;">leader of </span>
         <div style="margin: 0px 0px 0px 9px; position:absolute; z-index: 3;display: inline; justify-content: center; align-items: center; height: 13px; width: 20px;" >
@@ -143,26 +137,22 @@
     <span id="countrydesc" style="color:#cccc00;margin-left: 20px;"></span>
     <span id="leaderofcn" style="color:#cccccc">的最高领导人</span>
     <br>-->
-    <span id="detaildesc" style="white-space: pre-line;color: #c2ac89;">{leader}
-{flag}----{country} 的最高领导人
-------------------------------------------------------------
-        元首已不幸病故，举国震惊。毕竟，谁能想到这位不可战胜之人会这样死去呢？
-但国会对此早有准备。
+    <span id="detaildesc" style="white-space: pre-line;color: #8aadbe;text-shadow: 1px 1px 2px black;">{leader}
+-----------
+唐纳德·约翰·特朗普是当代美国最具有分裂性的政治家。身为纽约房地产大亨弗雷德·特朗普的儿子，将父亲的公司从一个酒店和赌场连锁企业，转变成了以他个人形象为招牌的国际品牌。他在2000年和2012年尝试过涉足政坛，最终在2016年总统选举中全力投入。经过一连串的爆冷，他最终获得共和党提名，并在大选中击败了前参议员和第一夫人希拉里·克林顿，成为美国总统。
 
-尽管元首早已点出他的继承者，但政府内部依然各执一词。改革派、保守派、强硬派、狂热派互相撕咬，和平有序进行权力交接的幌子顷刻间烟消云散。斗争的结果是，一群中间派、无名官僚和不受其他派系欢迎的国会议员们联合起来，遵循着三十年来为众人所忽视的宪法，宣布成立过渡行政机关，直至新任元首宣誓就职。
-
-元首之位的主要竞争者都对紧急委员会漠不关心，对他们而言，委员会充其量只是群坐冷板凳的家伙；若以冷眼观之，那么他们就是桀骜不驯的叛徒。唯一值得欣慰的是，他们的存在给日耳曼尼亚带来了一丝脆弱的稳定，防止这座城市陷入混乱，如此便可能会有一位更有能力的领导人出来重掌大局，希望如此。他们或许可以保住罗马不在烈火中化为废墟，却无法阻止帝国的其他部分被烈焰所吞噬。</span>
+特朗普从政策到个性的方方面面都颠覆了华盛顿特区所崇尚的老派形象。他信奉商业哲学：不做不能立即给自己带来实际利益的交易，绝不存在任何负面新闻，以及出现问题时绝不承认失败。支持者赞赏他的坦率，认为他敢于为中西部受挫的民众发声，敢于挑战迂腐的联邦体制。然而，众多批评者也谴责其肤浅自负，过于迎合极右翼分子，为了自己的虚荣不惜摧毁民主传统。但无论是支持还是反对，人们都难以否认，他拥有能激怒或煽动任何团体的魔力。</span>
 </div>
 
-<div id="sidebar" style="outline: 1px solid #cccc0088; font-family:Aldrich,FZRui; transition: 0.3s; transition-timing-function: ease-in-out; height: 100%; width: max-content; position: fixed;z-index: 12;top: 0;right: 0;color: #cccccc; background-color: #00000077;overflow-x: hidden; line-height: 27px; font-size: 15px; user-select: none;scrollbar-width: none; -webkit-scrollbar:none">
+<div id="sidebar" style="outline: 1px solid #cccc0088; font-family:Cubic; transition: 0.3s; transition-timing-function: ease-in-out; height: 100%; width: max-content; position: fixed;z-index: 12;top: 0;right: 0;color: #cccccc; background-image: linear-gradient(rgb(138 0 153 / 20%), rgb(0 0 0));overflow-x: hidden; line-height: 27px; font-size: 15px; user-select: none;scrollbar-width: none; -webkit-scrollbar:none">
 
-    <div id="tabs" style="font-family: Aldrich,FZRui; outline: none; background-color: #00000077;">
+    <div id="tabs" style="font-family: Cubic; outline: none; background-color: #00000077;">
         <ul style="background-color: #00000077;">
-          <li style="background-color: #338888;"><a href="#basics" onclick="document.getElementById('sfxsubmenu').play();">基本信息</a></li>
-          <li style="background-color: #338888;"><a href="#data" onclick="document.getElementById('sfxsubmenu').play();">数据</a></li>
+          <li style="background-color: #c226ff;"><a href="#basics" onclick="document.getElementById('sfxsubmenu').play();">信息</a></li>
+          <li style="background-color: #4a68ff;"><a href="#data" onclick="document.getElementById('sfxsubmenu').play();">数据</a></li>
           <li style="background-color: #338888;"><a href="#pictures" onclick="document.getElementById('sfxsubmenu').play();">图片</a></li>
-          <li style="background-color: #338888;"><a href="#description" onclick="document.getElementById('sfxsubmenu').play();">介绍</a></li>
-          <li style="background-color: #338888;"><a href="#control" onclick="document.getElementById('sfxsubmenu').play();">控制面板</a></li>
+          <li style="background-color: #6262da;"><a href="#description" onclick="document.getElementById('sfxsubmenu').play();">介绍</a></li>
+          <li style="background-color: #aeaeae;"><a href="#control" onclick="document.getElementById('sfxsubmenu').play();">控制面板</a></li>
         </ul>
         <audio id="sfxsubmenu" src="sfx/click_default.wav" preload="auto"></audio>
 
@@ -174,35 +164,33 @@
             <label>意识形态：</label><br><input id="ideologytextinput" placeholder="意识形态"><br>
             <label>选举：</label><br><input id="electioninput" placeholder="选举"><br><br>
             <label>国策：</label><br><input id="focustextinput" placeholder="国策">
-            <p>若出现字体异常，新闻字体颜色异常等，<br>请尝试：停用黑暗模式，更换浏览器。<br>若无效，欢迎<a style="color: #cccccc;" href="https://github.com/HittyGubby/TNOCreator/issues">提Issue</a>！</p>
+            <p>若出现字体异常，新闻字体颜色异常等，<br>请尝试：停用黑暗模式，更换浏览器。<br>若无效，欢迎<a style="color: #cccccc;" href="https://github.com/HittyGubby/TFRCreator/issues">提Issue</a>！</p>
         </div>
 <input type="file" id="fileInput" style="display: none;">
     <div id="data" style="color: #cccccc;">
         <label style="color: #cccc00;">国策进度：</label><input type="number" id="focusproginput" placeholder="国策进度" style="width: 52%; float: right;" oninput="document.getElementById('progressbar').style.width=`${this.value * 237 / 100}px`" min="0" max="100">
         <div id="poplist" style="line-height: 30px;">
             <label style="color: #cccc00;">饼图角度：</label><input type="number" placeholder="任意"><br>
-            <label style="color: #0acc00;">虚无主义：</label><input><br>
-            <label style="color: #2d0033;">秘传纳粹主义：</label><input><br>
-            <label style="color: #141414;">极端民族主义：</label><input><br>
-            <label style="color: #692500;">国家社会主义：</label><input><br>
-            <label style="color: #9c6d00;">法西斯主义：</label><input><br>
-            <label style="color: #666666;">专制主义：</label><input><br>
-            <label style="color: #b0b0b0;">家长制民主：</label><input><br>
-            <label style="color: #0700d6;">保守主义：</label><input><br>
-            <label style="color: #0083c9;">自由保守主义：</label><input><br>
-            <label style="color: #00d5ff;">自由主义：</label><input><br>
-            <label style="color: #c8009a;">进步主义：</label><input><br>
-            <label style="color: #d90000;">社会主义：</label><input><br>
-            <label style="color: #950000;">共产主义：</label><input><br>
+            <label style="color: rgb(100,0,0)">极权社会主义：</label><input><br>
+            <label style="color: rgb(153,0,0)">共产主义：</label><input><br>
+            <label style="color: rgb(189,54,67)">自由社会主义：</label><input><br>
+            <label style="color: rgb(255,10,102)">社会民主主义：</label><input><br>
+            <label style="color: rgb(255,170,30)">社会自由主义：</label><input><br>
+            <label style="color: rgb(225,215,0)">市场自由主义：</label><input><br>
+            <label style="color: rgb(10,15,255)">保守主义：</label><input><br>
+            <label style="color: rgb(124,124,124)">威权民主主义：</label><input><br>
+            <label style="color: rgb(5,5,5)">民族主义：</label><input><br>
+            <label style="color: rgb(123,84,46)">法西斯主义：</label><input><br>
+            <label style="color: rgb(78,57,57)">国家社会主义：</label><input><br>
         </div>
     </div>
 
         <div id="pictures" style="color: #cccccc;">
-            <p style="color: red;">每个图片输入都包括两个输入框<br>第一个输入框是原版素材(已转png)，输入可以查询<br>第二个是用户上传的素材，也可以查询</p>
             <div id="piccontainer"></div>
-            <button id="checkboxshared" style="color: #cccccc; border: none; width: 300px; height: 34px; font-family:Aldrich,FZRui;background:url('template/generic_checkbox_unchecked.png') no-repeat;" onclick="checkshare()">共享上传的图片素材</button>
+            <button id="checkboxshared" style="color: #cccccc; border: none; width: 260px; height: 34px; font-family:Cubic;background:url('template/generic_checkbox_unchecked.png') no-repeat;" onclick="checkshare()">共享上传的图片素材</button>
             <br>
-            <button id="checkboxqueryshared" style="color: #cccccc; border: none; width: 300px; height: 34px; font-family:Aldrich,FZRui;background:url('template/generic_checkbox_unchecked.png') no-repeat;" onclick="checkqueryshare()">查询包括他人上传的素材</button>
+            <button id="checkboxqueryshared" style="color: #cccccc; border: none; width: 260px; height: 34px; font-family:Cubic;background:url('template/generic_checkbox_unchecked.png') no-repeat;" onclick="checkqueryshare()">查询包括他人上传的素材</button><br>
+            <span style="color: red;">每个图片输入都包括两个输入框<br>第一个输入框是原版素材(已转png)<br>第二个是用户上传的素材<br>都可以查询！</span>
         </div>
 
         <div id="description" style="color: #cccccc;">
@@ -220,10 +208,8 @@
 
         <div id="control" style="color: #cccccc;">
         <div id="controlbuttons">
-            <span>语言：</span>
-            <button id="lang" onclick="langchange()" style="float: right;">中文</button><br><br>
             <span>背景颜色：</span>
-            <input id="backgroundinput" style="width: 50%; float: right;" oninput="document.body.style.backgroundColor = document.getElementById('backgroundinput').value" placeholder="支持透明度！" value="rgb(51, 51, 51)"><br>
+            <input id="backgroundinput" style="width: 50%; float: right;" oninput="document.body.style.backgroundColor = document.getElementById('backgroundinput').value" placeholder="支持透明度！" value="rgb(11, 0, 18)"><br>
             <!--<span id="screenshotprogress" style="color:#cccc00;"></span><br>-->
             <br>
             <button id="screenshot" onclick="screenshot()">截图</button>
@@ -234,10 +220,10 @@
         </div>
         <br>
         <div id="checkboxs">
-            <button class="checkbox" id="checkboxdesc" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Aldrich,FZRui;" onclick="check(this)">介绍窗口</button>
-            <button class="checkbox" id="checkboxecon" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Aldrich,FZRui;" onclick="check(this)">经济窗口</button><br>
-            <button class="checkbox" id="checkboxnewswindow" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Aldrich,FZRui;" onclick="check(this)">新闻窗口</button>
-            <button class="checkbox" id="checkboxsuperwindow" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Aldrich,FZRui;" onclick="check(this)">超事件窗口</button>
+            <button class="checkbox" id="checkboxdesc" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Cubic;" onclick="check(this)">介绍窗口</button>
+            <button class="checkbox" id="checkboxecon" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Cubic;" onclick="check(this)">经济窗口</button><br>
+            <button class="checkbox" id="checkboxnewswindow" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Cubic;" onclick="check(this)">新闻窗口</button>
+            <button class="checkbox" id="checkboxsuperwindow" style="background:url('template/generic_checkbox_checked.png') no-repeat;font-family: Cubic;" onclick="check(this)">超事件窗口</button>
             <audio id="sfxcheck" src="sfx/click_checkbox.wav" preload="auto"></audio>
         </div><br>
             <span>管理预设：</span>
@@ -259,7 +245,7 @@
 
     <audio id="sfxclosewindow" src="sfx/click_window_close.wav" preload="auto"></audio>
     <audio id="sfxopenwindow" src="sfx/click_window_open.wav" preload="auto"></audio>
-    <button id="sidebarbutton" style="color: #cccccc;position: fixed;bottom: 10px;right: 10px;z-index: 12; transition: 0.3s; background: url('template/button_123x34.png') no-repeat; border: none; width: 123px; height: 34px; font-family:Aldrich,FZRui;"  onclick="sidebartoggle()">隐藏侧栏</button>
+    <button id="sidebarbutton" style="color: #cccccc;position: fixed;bottom: 10px;right: 10px;z-index: 12; transition: 0.3s; background: url('template/button_123x34.png') no-repeat; border: none; width: 163px; height: 34px; font-family:Cubic;"  onclick="sidebartoggle()">隐藏侧栏</button>
 </div>
 </body>
 </html>
