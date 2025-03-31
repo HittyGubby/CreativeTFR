@@ -4,7 +4,12 @@
 @font-face {font-family: kenyan;src: url(fonts/kenyancoffee.ttf) format('truetype');}
 @font-face {font-family: huangyouti;src: url(fonts/huangyouti.ttf) format('truetype');}
 
-#basics input{height: 19px; font-family: Cubic; background-color: #cccccc20;
+.checkbox {color: #cccccc; border: none; width: 160px; height: 34px;transition: 0.3s;
+    font-family:Cubic;background:url('template/generic_checkbox_checked.png') no-repeat;}
+.button {color: #cccccc; transition: 0.3s; background: url('template/button_123x34.png') no-repeat; border: none;
+    width: 163px; height: 34px; font-family:Cubic;}
+
+/* #basics input{height: 19px; font-family: Cubic; background-color: #cccccc20;
     outline:1px solid #7ccccc; color: #7ccccc; font-size: 15px;text-align: center; width: 100%;}
 #poplist input{height: 19px; font-family: Cubic; background-color: #cccccc20;
     outline:1px solid #7ccccc; color: #7ccccc; font-size: 15px;text-align: center; width: 52%;  float: right;}
@@ -21,8 +26,6 @@
     color: #7ccccc; font-size: 15px;text-align: center;}
 #description textarea{height: 15px; font-family: Cubic; background-color: #cccccc20;
     outline:1px solid #7ccccc; color: #7ccccc; font-size: 15px;overflow-wrap: break-word; min-height: 6lh; width: 100%;resize: vertical;}
-/*.list {height: 19px; font-family: Cubic; background-color: #cccccc20;
-    outline:1px solid #7ccccc; color: #7ccccc; font-size: 15px; width: 250px; float: right;}*/
 .checkbox {color: #cccccc; border: none; width: 160px; height: 34px;transition: 0.3s;
     font-family:Cubic;background:url('template/generic_checkbox_checked.png') no-repeat;}
 .autocomp :hover{background-color: #999999;border-bottom: 1px solid #cccc00;}
@@ -34,4 +37,5 @@
 .queryuserinput {height: 19px; font-family: Cubic; background-color: #cccccc20; 
         outline:1px solid #7ccccc; color: #7ccccc; font-size: 15px;text-align: center; width: 70%;  float: right;}
 .preset-entry button {display: none;}
-.preset-entry:hover button {display: inline-block;}
+.preset-entry:hover button {display: inline-block;} */
+
