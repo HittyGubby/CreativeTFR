@@ -1,27 +1,29 @@
 <script>
 import Pie from './piechart.vue';
 import ChartEditor from '../Controller/ChartEditor.vue';
+import { ref } from 'vue';
 
 export default {
   components: { Pie, ChartEditor },
-  data() {
+  setup() {
+    const editorVisible = ref(false);
+    const chartData = ref({
+      labels: ['争取社会主义和解放党（反修派）', '争取社会主义和解放党（温和派）', '美国民主社会主义者', '民主党（进步派）', '民主党（自由派）', '自由意志党', '共和党（保守派）', '共和党（民粹派）', '美国武装力量', '爱国者阵线', '民族社会主义运动'],
+      datasets: [{
+        data: [0, 1, 3, 8, 40, 5, 42, 1, 0, 0, 0],
+        backgroundColor: ['#640000', '#990000', '#BD3643', '#FF0A66', '#FFAA1E', '#E1D700', '#0A0FFF', '#7C7C7C', '#050505', '#7B542E', '#4E3939'],
+        borderWidth: 0,
+        spacing: 0
+      }],
+      options: {
+        rotation: 50
+      }
+    });
+
     return {
-      chartData: {
-        labels: [],
-        datasets: [{
-          data: [0, 1, 3, 8, 40, 5, 42, 1, 0, 0, 0],
-          backgroundColor: ['#640000', '#990000', '#BD3643', '#FF0A66', '#FFAA1E', '#E1D700', '#0A0FFF', '#7C7C7C', '#050505', '#7B542E', '#4E3939'],
-          borderWidth: 0,
-          spacing: 0
-        }]
-      },
-      editorVisible: false
-    }
-  },
-  methods: {
-    updateChartData(newData) {
-      this.chartData = newData
-    }
+      chartData,
+      editorVisible
+    };
   }
 }
 </script>
@@ -74,7 +76,7 @@ export default {
         <img src="/template/bck_shadow.png" style="position:absolute;scale: 0.6;z-index: 0;">
         <Pie id="piechart"
           style="width: 100px;height: 100px; border-radius: 50%;background:none; scale: 0.7;z-index: 4;"
-          :chart-data="chartData" />
+          v-model="chartData" />
         <img src="/template/pol_piechart_overlay_63x63.png" style="position:absolute;scale: 0.9;z-index: 5;"
           @click="editorVisible = true">
       </div>
@@ -98,6 +100,7 @@ export default {
       </div>
     </div>
   </div>
-  <ChartEditor v-if="editorVisible" :chart-data="chartData" @update-chart="updateChartData"
-    @close="editorVisible = false" style="z-index: 100;" />
+  <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '580px', fontFamily: 'Cubic' }">
+    <ChartEditor v-model="chartData" />
+  </Dialog>
 </template>

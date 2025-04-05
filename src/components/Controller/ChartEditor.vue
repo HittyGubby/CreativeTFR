@@ -1,111 +1,270 @@
 <template>
-    <Dialog v-model:visible="visible" modal header="Chart Editor" :style="{ width: '50vw' }">
-        <div class="flex flex-column">
-            <InputNumber v-model="rotation" @update:modelValue="updateChart" />
-            <DataTable :value="localData" editMode="cell" @cell-edit-complete="updateChart">
-                <Column field="sequence" header="Seq" :editor="options => h(InputNumber, { ...options, min: 1 })" />
-                <Column field="backgroundColor" header="Color">
-                    <template #body="slotProps">
-                        <div
-                            :style="{ backgroundColor: slotProps.data.backgroundColor, width: '20px', height: '20px' }">
-                        </div>
-                    </template>
-                    <template #editor="slotProps">
-                        <input type="color" v-model="slotProps.data.backgroundColor" @change="updateChart" />
-                    </template>
-                </Column>
-                <Column field="label" header="Name" :editor="options => h(InputText, options)" />
-                <Column field="data" header="Data" :editor="options => h(InputNumber, options)" />
-                <Column>
-                    <template #body="slotProps">
-                        <Button icon="pi pi-trash" @click="removeColor(slotProps.index)"></Button>>
-                        <Button icon="pi pi-arrow-up" @click="moveUp(slotProps.index)"
-                            :disabled="slotProps.index === 0"></Button>
-                        <Button icon="pi pi-arrow-down" @click="moveDown(slotProps.index)"
-                            :disabled="slotProps.index === localData.length - 1"></Button>
-                    </template>
-                </Column>
-            </DataTable>
-            <Button label="Add Color" @click="addColor" />
+
+    <div class="editor-container">
+        <div class="angle-control">
+            <span class="angle-label">饼图角度（DEG）：</span>
+            <InputNumber v-model="rotation" :min="0" :max="360" :step="1" @input="updateChartWithRotation"
+                class="narrow-number" />
+            <span class="angle-label">（0~360度，超过将对360度取余）</span>
         </div>
-    </Dialog>
+        <draggable v-model="localData" item-key="sequence" handle=".drag-handle" @end="updateChart">
+            <template #item="{ element: item, index }">
+                <div class="drag-item">
+                    <i class="pi pi-bars drag-handle"></i>
+                    <span class="sequence-number">{{ index + 1 }}</span>
+                    <div class="color-container">
+                        <div v-if="!item.editing"
+                            :style="{ backgroundColor: item.backgroundColor, width: '20px', height: '20px', borderRadius: '4px' }">
+                        </div>
+                        <input v-else type="color" v-model="item.backgroundColor" @change="onColorChange(index)"
+                            class="color-picker" />
+                    </div>
+                    <div class="label-container">
+                        <span v-if="!item.editing" class="label-text">{{ item.label }}</span>
+                        <InputText v-else v-model="item.label" @keyup.enter="saveEdit(index)" />
+                    </div>
+                    <div class="data-container">
+                        <span v-if="!item.editing">{{ item.data }}</span>
+                        <InputNumber v-else v-model="item.data" @keyup.enter="saveEdit(index)" />
+                    </div>
+                    <div class="actions-container">
+                        <Button v-if="!item.editing" icon="pi pi-pencil" @click="startEdit(index)" severity="help" />
+                        <template v-else>
+                            <Button icon="pi pi-check" @click="saveEdit(index)" severity="help"
+                                class="p-button-success" />
+                            <Button icon="pi pi-times" @click="cancelEdit(index)" severity="help"
+                                class=" p-button-danger" />
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </draggable>
+    </div>
 </template>
 
 <script>
-import { h } from 'vue'
+import { h, ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
 import Button from 'primevue/button'
 import InputNumber from 'primevue/inputnumber'
 import InputText from 'primevue/inputtext'
+import draggable from 'vuedraggable'
+import 'primeicons/primeicons.css'
 
 export default {
-    components: { Dialog, DataTable, Column, Button, InputNumber, InputText },
-    props: ['chartData'],
-    data() {
-        return {
-            visible: true,
-            localData: [],
-            rotation: 0
+    name: 'ChartEditor',
+    components: { Dialog, Button, InputNumber, InputText, draggable },
+    props: {
+        modelValue: {
+            type: Object,
+            required: true
+        },
+        visible: {
+            type: Boolean,
+            default: false
         }
     },
-    watch: {
-        chartData: {
-            immediate: true,
-            handler(newData) {
-                this.localData = newData.datasets[0].data.map((value, i) => ({
+    emits: ['update:modelValue', 'update:visible'],
+    setup(props, { emit }) {
+        const rotation = ref(0)
+        const localData = ref([])
+        const originalData = ref([])
+
+        watch(() => props.modelValue, (newData) => {
+            if (newData) {
+                localData.value = newData.datasets[0].data.map((value, i) => ({
                     sequence: i + 1,
                     backgroundColor: newData.datasets[0].backgroundColor[i],
                     label: newData.labels[i],
-                    data: value
+                    data: value,
+                    editing: false
                 }))
+                originalData.value = JSON.parse(JSON.stringify(localData.value))
+                rotation.value = newData.options?.rotation || 0
+            }
+        }, { immediate: true })
+
+        const updateChart = () => {
+            const updatedData = {
+                labels: localData.value.map(item => item.label),
+                datasets: [{
+                    data: localData.value.map(item => item.data),
+                    backgroundColor: localData.value.map(item => item.backgroundColor),
+                    borderWidth: 0,
+                    spacing: 0
+                }],
+                options: {
+                    rotation: rotation.value
+                }
+            }
+            emit('update:modelValue', updatedData)
+        }
+
+        const updateChartWithRotation = (event) => {
+            rotation.value = event.value % 360
+            updateChart()
+        }
+
+        const startEdit = (index) => {
+            localData.value.forEach((item, i) => {
+                item.editing = i === index
+            })
+        }
+
+        const saveEdit = (index) => {
+            localData.value[index].editing = false
+            updateChart()
+        }
+
+        const cancelEdit = (index) => {
+            const original = originalData.value[index]
+            localData.value[index] = {
+                ...original,
+                editing: false
             }
         }
-    },
-    methods: {
-        updateChart() {
-            const updatedData = {
-                labels: this.localData.map(item => item.label),
-                datasets: [{
-                    data: this.localData.map(item => item.data),
-                    backgroundColor: this.localData.map(item => item.backgroundColor),
-                    borderWidth: 2,
-                    spacing: 0
-                }]
-            }
-            this.$emit('update-chart', updatedData)
-        },
-        addColor() {
-            this.localData.push({ sequence: this.localData.length + 1, backgroundColor: '#000000', label: 'New', data: 0 })
-            this.updateChart()
-        },
-        removeColor(index) {
-            this.localData.splice(index, 1)
-            this.localData.forEach((item, i) => item.sequence = i + 1)
-            this.updateChart()
-        },
-        moveUp(index) {
-            const temp = this.localData[index]
-            this.localData[index] = this.localData[index - 1]
-            this.localData[index - 1] = temp
-            this.localData.forEach((item, i) => item.sequence = i + 1)
-            this.updateChart()
-        },
-        moveDown(index) {
-            const temp = this.localData[index]
-            this.localData[index] = this.localData[index + 1]
-            this.localData[index + 1] = temp
-            this.localData.forEach((item, i) => item.sequence = i + 1)
-            this.updateChart()
+
+        const onColorChange = (index) => {
+            updateChart()
+        }
+
+        return {
+            rotation,
+            localData,
+            updateChart,
+            updateChartWithRotation,
+            startEdit,
+            saveEdit,
+            cancelEdit,
+            onColorChange
         }
     }
 }
 </script>
 
 <style scoped>
-:deep(.p-datatable) {
-    max-height: 400px;
-    overflow-y: auto;
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.angle-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.angle-label {
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.drag-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.drag-item:hover {
+    background: var(--surface-hover);
+}
+
+.drag-handle {
+    cursor: move;
+    color: #666;
+    transition: color 0.2s;
+    padding: 0.5rem;
+}
+
+.drag-handle:hover {
+    color: var(--primary-color);
+}
+
+.sequence-number {
+    min-width: 2rem;
+    text-align: center;
+    color: var(--text-color-secondary);
+}
+
+.color-container {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    min-width: 20px;
+}
+
+.color-picker {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+.label-container {
+    display: flex;
+    align-items: center;
+    min-width: 80px;
+    flex: 1;
+    max-width: 200px;
+}
+
+.label-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.data-container {
+    display: flex;
+    align-items: center;
+    min-width: 60px;
+    width: 80px;
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+}
+
+:deep(.p-button.p-button-text) {
+    padding: 0.5rem;
+}
+
+:deep(.p-button.p-button-text:enabled:hover) {
+    background: rgba(var(--primary-color-rgb), 0.94);
+}
+
+:deep(.p-inputtext) {
+    width: 100%;
+    min-width: 60px;
+    max-width: 200px;
+}
+
+:deep(.p-inputnumber .p-inputtext) {
+    width: 100%;
+}
+
+:deep(.p-dialog-content) {
+    padding: 1.5rem;
 }
 </style>

@@ -20,8 +20,8 @@
 }
 
 input[type="checkbox"] {
-  background: url("/public/template/generic_checkbox_unchecked.png") no-repeat;
-  -webkit-appearance: none;
+  background: url("/template/generic_checkbox_unchecked.png") no-repeat;
+  appearance: none;
   background-size: 100%;
   font-family: Cubic;
   transition: 0.2s;
@@ -35,7 +35,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background: url("/public/template/generic_checkbox_checked.png") no-repeat;
+  background: url("/template/generic_checkbox_checked.png") no-repeat;
   background-size: 100%;
 }
 
