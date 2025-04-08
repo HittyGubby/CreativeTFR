@@ -1,8 +1,56 @@
+<script>
+import { ref, onMounted } from 'vue';
+import PicManager from '@/components/Controller/PicManager.vue';
+
+export default {
+    components: { PicManager },
+    setup() {
+        const picManagerVisible = ref(false);
+        const picManagerType = ref('');
+        const picManagerTargetId = ref('');
+        const picManagerResizable = ref(false);
+
+        const updatePicture = ({ id, url, scale }) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.src = url ? url : element.src;
+                if (scale !== undefined) {
+                    element.style.scale = scale;
+                }
+            }
+        };
+
+        const handlePicClick = (event) => {
+            const target = event.target;
+            if (target.dataset.modifiable === 'true') {
+                picManagerType.value = target.dataset.type;
+                picManagerTargetId.value = target.dataset.targetId;
+                picManagerResizable.value = target.dataset.resizable === 'true';
+                picManagerVisible.value = true;
+            }
+        };
+
+        onMounted(() => {
+            document.addEventListener('click', handlePicClick);
+        });
+
+        return {
+            picManagerVisible,
+            picManagerType,
+            picManagerTargetId,
+            picManagerResizable,
+            updatePicture
+        };
+    }
+}
+</script>
 <template>
     <div class="draggable" id="newswindow" style="position: absolute; left: -30px;top: 560px; z-index: 4;">
         <img src="/template/news/event_news_bg.png" style="position: relative;">
-        <div style="position:absolute;top: 164px; left: 150px;">
-            <img id="newspic" class="pic" src="/preset/Tank_Duel.png" style="position:absolute;">
+        <div style="position:absolute;top: 164px; left: 150px;width: 400px; height: 150px;">
+            <img id="newspic" class="pic" src="/preset/Tank_Duel.png"
+                style="position:absolute; width: inherit;height: inherit;" data-modifiable="true" data-type="news"
+                data-resizable="false" data-target-id="newspic">
         </div>
         <button id="newsbutton" class="button text"
             style="position:absolute; top: 700px; left: 180px;transition: 0.2s; background: url('/template/news/event_option_entry.png') no-repeat; border: none; width: 352px; height: 48px; font-family:electrolize,FZRui;font-size: 17px;color: #ffffff;">骨肉再次相残。</button>

@@ -5,7 +5,7 @@ import MainWindow from './components/HtmlBase/mainwindow.vue';
 import Description from './components/HtmlBase/description.vue';
 import News from './components/HtmlBase/news.vue';
 import Sfx from './components/HtmlBase/sfx.vue';
-import Sidebar from './components/HtmlBase/sidebar.vue';
+import Sidebar from './components/Controller/Generic.vue';
 import SuperEvent from './components/HtmlBase/superevent.vue';
 onMounted(() => { window.onload = initApp; });
 </script>

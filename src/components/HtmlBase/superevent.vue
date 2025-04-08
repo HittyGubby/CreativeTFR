@@ -1,7 +1,54 @@
+<script>
+import { ref, onMounted } from 'vue';
+import PicManager from '@/components/Controller/PicManager.vue';
+
+export default {
+  components: { PicManager },
+  setup() {
+    const picManagerVisible = ref(false);
+    const picManagerType = ref('');
+    const picManagerTargetId = ref('');
+    const picManagerResizable = ref(false);
+
+    const updatePicture = ({ id, url, scale }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.src = url ? url : element.src;
+        if (scale !== undefined) {
+          element.style.scale = scale;
+        }
+      }
+    };
+
+    const handlePicClick = (event) => {
+      const target = event.target;
+      if (target.dataset.modifiable === 'true') {
+        picManagerType.value = target.dataset.type;
+        picManagerTargetId.value = target.dataset.targetId;
+        picManagerResizable.value = target.dataset.resizable === 'true';
+        picManagerVisible.value = true;
+      }
+    };
+
+    onMounted(() => {
+      document.addEventListener('click', handlePicClick);
+    });
+
+    return {
+      picManagerVisible,
+      picManagerType,
+      picManagerTargetId,
+      picManagerResizable,
+      updatePicture
+    };
+  }
+}
+</script>
 <template>
   <div class="draggable" id="superwindow" style="position: absolute; left: 660px;top: 20px; z-index: 4;">
-    <img src="/template/super_frame.png" style="position: relative;z-index: 1;">
-    <div style="position:absolute;position:absolute;top:30px;left: 5px;">
+    <img src="/template/super_frame.png" style="position: relative;z-index: 1;" data-modifiable="true" data-type="super"
+      data-resizable="false" data-target-id="superpic">
+    <div style="position:absolute;position:absolute;top:30px;left: 5px; width: 982px;height: 594px;">
       <img id="superpic" class="pic" src="/preset/super_USA_civil_war.png"
         style="height: inherit; width: inherit;z-index: 0;">
     </div>

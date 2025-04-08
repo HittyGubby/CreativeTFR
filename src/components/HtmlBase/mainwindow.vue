@@ -1,12 +1,17 @@
 <script>
 import Pie from './piechart.vue';
 import ChartEditor from '../Controller/ChartEditor.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import PicManager from '@/components/Controller/PicManager.vue';
 
 export default {
-  components: { Pie, ChartEditor },
+  components: { Pie, ChartEditor, PicManager },
   setup() {
     const editorVisible = ref(false);
+    const picManagerVisible = ref(false);
+    const picManagerType = ref('');
+    const picManagerTargetId = ref('');
+    const picManagerResizable = ref(false);
     const chartData = ref({
       labels: ['争取社会主义和解放党（反修派）', '争取社会主义和解放党（温和派）', '美国民主社会主义者', '民主党（进步派）', '民主党（自由派）', '自由意志党', '共和党（保守派）', '共和党（民粹派）', '美国武装力量', '爱国者阵线', '民族社会主义运动'],
       datasets: [{
@@ -20,9 +25,38 @@ export default {
       }
     });
 
+    const updatePicture = ({ id, url, scale }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.src = url ? url : element.src;
+        if (scale !== undefined) {
+          element.style.scale = scale;
+        }
+      }
+    };
+
+    const handlePicClick = (event) => {
+      const target = event.target;
+      if (target.dataset.modifiable === 'true') {
+        picManagerType.value = target.dataset.type;
+        picManagerTargetId.value = target.dataset.targetId;
+        picManagerResizable.value = target.dataset.resizable === 'true';
+        picManagerVisible.value = true;
+      }
+    };
+
+    onMounted(() => {
+      document.addEventListener('click', handlePicClick);
+    });
+
     return {
       chartData,
-      editorVisible
+      editorVisible,
+      picManagerVisible,
+      picManagerType,
+      picManagerTargetId,
+      picManagerResizable,
+      updatePicture
     };
   }
 }
@@ -31,10 +65,12 @@ export default {
 <template>
   <div id="main-container" style="position:absolute;z-index: 8; user-select: none;">
     <div>
-      <img src="/template/diplo_leader_frame.png" style="position: relative;z-index: 1;top:70px">
+      <img id="leader-overlay" src="/template/diplo_leader_frame.png" data-modifiable="true" data-type="leader"
+        data-resizable="false" style="position: relative;z-index: 1;top:70px" data-target-id="leaderpic" />
       <div style="position:absolute; top: 15px; left: 22px; height: 55px; width: 90px; z-index: 2;">
-        <img src="/template/flag_overlay.png"
-          style="position:absolute; top:0; left:0;z-index: 1;height: inherit; width: inherit; scale: 1.3;">
+        <img id="flag-overlay" src="/template/flag_overlay.png" data-modifiable="true" data-type="flag"
+          data-resizable="false" data-target-id="flagpic"
+          :style="{ position: 'absolute', top: '0', left: '0', height: 'inherit', width: 'inherit', scale: 1.3, zIndex: 1 }" />
         <img id="flagpic" class="pic" src="/preset/USA.png"
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
@@ -43,7 +79,7 @@ export default {
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
       <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">
-        <img id="portraitpic" class="pic" src="/preset/USA_donald_trump5.png"
+        <img id="leaderpic" class="portrait-overlay" src="/preset/USA_donald_trump5.png"
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
     </div>
@@ -53,11 +89,15 @@ export default {
       <img src="/template/diplo_top_bg_diplo_tab.png" style="position: absolute;z-index: 2; left: 125px; top: 76px;">
       <div
         style="position:absolute; top: 42px; left: 177px; z-index: 3;display: flex; justify-content: center; align-items: center;">
-        <img id="ideologypic" class="pic" src="/preset/right_populism_USA.png" style="position:absolute;">
+        <img id="ideologypic" src="/preset/right_populism_USA.png" data-modifiable="true" data-type="ideology"
+          data-resizable="true" data-initial-scale="1" :style="{ position: 'absolute', scale: 1 }"
+          data-target-id="ideologypic" />
       </div>
       <div
         style="position:absolute; top: 40px; left: 485px; z-index: 3;display: flex; justify-content: center; align-items: center;">
-        <img id="factionpic" class="pic" src="/preset/GFX_NATO_Member.png" style="position:absolute;">
+        <img id="factionpic" src="/preset/GFX_NATO_Member.png" data-modifiable="true" data-type="faction"
+          data-resizable="true" data-initial-scale="1" :style="{ position: 'absolute', scale: 1 }"
+          data-target-id="factionpic" />
       </div>
       <div
         style="position:absolute; top: 220px; left: 373px; z-index: 3;display: flex; justify-content: center; align-items: center;">
@@ -68,8 +108,9 @@ export default {
         <img id="progressbar" src="/template/pol_goal_progress.png" style="position:absolute; width: 0px;height: 6px;">
       </div>
       <div
-        style="position:absolute; top: 202px; left: 182px; z-index: 3;display: flex; justify-content: center; align-items: center;">
-        <img id="focuspic" class="pic" src="/preset/goal_unknown.png" style="position:absolute;scale: 0.9;">
+        style="position:absolute; top: 202px; left: 182px; z-index: 5;display: flex; justify-content: center; align-items: center;">
+        <img id="focuspic" src="/preset/goal_unknown.png" data-modifiable="true" data-type="focus" data-resizable="true"
+          data-initial-scale="0.9" :style="{ position: 'absolute', scale: 0.9 }" data-target-id="focuspic" />
       </div>
       <div id="piechartparent"
         style="position:absolute; top: 72px; left: 133px; z-index: 3;display: flex; justify-content: center; align-items: center;">
@@ -103,4 +144,6 @@ export default {
   <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '580px', fontFamily: 'Cubic' }">
     <ChartEditor v-model="chartData" />
   </Dialog>
+  <PicManager v-model:visible="picManagerVisible" :type="picManagerType" :targetId="picManagerTargetId"
+    :resizable="picManagerResizable" @update:pic="updatePicture" />
 </template>

@@ -6,7 +6,7 @@ import VueDraggableResizable from "vue-draggable-resizable";
 import PrimeVue from "primevue/config";
 import Aura from "@primeuix/themes/aura";
 import { VueDraggableNext } from "vue-draggable-next";
-import { Button, Dialog, DataTable } from "primevue";
+import { Button, Dialog } from "primevue";
 
 const app = createApp(App);
 app.component("Button", Button);
