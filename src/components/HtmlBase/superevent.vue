@@ -9,6 +9,7 @@ export default {
     const picManagerType = ref('');
     const picManagerTargetId = ref('');
     const picManagerResizable = ref(false);
+    let zIndexCounter = 10;
 
     const updatePicture = ({ id, url, scale }) => {
       const element = document.getElementById(id);
@@ -30,8 +31,18 @@ export default {
       }
     };
 
+    const prioritizeWindow = (event) => {
+      const target = event.target.closest('.draggable');
+      if (target) {
+        zIndexCounter++;
+        target.style.zIndex = zIndexCounter;
+      }
+    };
+
     onMounted(() => {
       document.addEventListener('click', handlePicClick);
+      const windowElement = document.getElementById('superwindow');
+      windowElement.addEventListener('mousedown', prioritizeWindow);
     });
 
     return {

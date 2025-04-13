@@ -13,20 +13,22 @@ var { draggable } = useWindows();
 var visible = ref(false);
 let isDragging = false;
 
-document.getElementById('app').addEventListener('mousedown', (event) => {
-  if (event.target === document.getElementById('app')) {
-    isDragging = false;
-  }
-});
+onMounted(() => {
+  document.getElementById('app').addEventListener('mousedown', (event) => {
+    if (event.target === document.getElementById('app')) {
+      isDragging = false;
+    }
+  });
 
-document.getElementById('app').addEventListener('mousemove', () => {
-  isDragging = true;
-});
+  document.getElementById('app').addEventListener('mousemove', () => {
+    isDragging = true;
+  });
 
-document.getElementById('app').addEventListener('mouseup', (event) => {
-  if (!isDragging && event.target === document.getElementById('app')) {
-    visible.value = true;
-  }
+  document.getElementById('app').addEventListener('mouseup', (event) => {
+    if (!isDragging && event.target === document.getElementById('app')) {
+      visible.value = true;
+    }
+  });
 });
 </script>
 
@@ -35,7 +37,7 @@ document.getElementById('app').addEventListener('mouseup', (event) => {
 
   <vue-draggable-resizable id="Description" :draggable="draggable" style="position: absolute; height: min-content;"
     :w="320" :x="12" :y="255">
-    <Description></Description>
+    <Description class="window"></Description>
   </vue-draggable-resizable>
 
   <vue-draggable-resizable id="News" :draggable="draggable" :w="713" :x="-30" :y="600" :h="935">
@@ -43,12 +45,11 @@ document.getElementById('app').addEventListener('mouseup', (event) => {
   </vue-draggable-resizable>
 
   <vue-draggable-resizable id="SuperEvent" :draggable="draggable" :w="1001" :x="530" :y="-930" :h="639">
-    <SuperEvent></SuperEvent>
+    <SuperEvent class="window"></SuperEvent>
   </vue-draggable-resizable>
 
-  <Dialog v-model:visible="visible" modal header="控制面板" :style="{ width: '12vw', fontFamily: 'Cubic' }"
-    :closable="true">
-    <Generic></Generic>
+  <Dialog v-model:visible="visible" :style="{ width: '300px', fontFamily: 'Cubic' }" header="控制面板">
+    <Generic class="window"></Generic>
   </Dialog>
 
   <Sfx></Sfx>
