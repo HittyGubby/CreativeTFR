@@ -6,10 +6,7 @@ export function initApp() {
   observer.observe(document.body, { childList: true, subtree: true });
 
   document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('text')) {
-      event.stopPropagation();
-      Edittext(event.target);
-    }
+    if (event.target.classList.contains('text')) { Edittext(event); }
   });
 
   if (sessionStorage.getItem('data') != null) {

@@ -45,7 +45,7 @@ export default {
 }
 </script>
 <template>
-  <div class="draggable" id="superwindow" style="position: absolute; left: 660px;top: 20px; z-index: 4;">
+  <div class="draggable" id="superwindow" style="position: absolute; z-index: 4;">
     <img src="/template/super_frame.png" style="position: relative;z-index: 1;" data-modifiable="true" data-type="super"
       data-resizable="false" data-target-id="superpic">
     <div style="position:absolute;position:absolute;top:30px;left: 5px; width: 982px;height: 594px;">

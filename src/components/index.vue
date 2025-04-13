@@ -1,5 +1,6 @@
 <script>
-export function Edittext(original) {
+export function Edittext(event) {
+  let original = event.target;
   if (original.dataset.editing) return;
   original.dataset.editing = 'true';
   const rawHTML = original.innerHTML;
@@ -28,6 +29,8 @@ export function Edittext(original) {
       editable.blur();
     }
   });
+
+  event.stopPropagation();
 }
 
 

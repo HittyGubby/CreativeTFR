@@ -1,7 +1,6 @@
 <script>
 import { ref, onMounted } from 'vue';
 import PicManager from '@/components/Controller/PicManager.vue';
-
 export default {
     components: { PicManager },
     setup() {
@@ -44,8 +43,9 @@ export default {
     }
 }
 </script>
+
 <template>
-    <div class="draggable" id="newswindow" style="position: absolute; left: -30px;top: 560px; z-index: 4;">
+    <div class="draggable" id="newswindow" style="position: absolute; z-index: 4;">
         <img src="/template/news/event_news_bg.png" style="position: relative;">
         <div style="position:absolute;top: 164px; left: 150px;width: 400px; height: 150px;">
             <img id="newspic" class="pic" src="/preset/Tank_Duel.png"

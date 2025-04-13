@@ -1,7 +1,7 @@
 <template>
     <Dialog :visible="visible" @update:visible="(value) => $emit('update:visible', value)" :modal="true"
         :style="{ width: '70%', maxWidth: '90%', fontFamily: 'Cubic' }" :header="'图片管理 - ' + type"
-        class="pic-manager-dialog">
+        class="pic-manager-dialog" :closable="true">
         <div class="pic-manager-container">
             <div v-if="!type" class="no-type-message">请先点击要修改的图片</div>
             <template v-else>
