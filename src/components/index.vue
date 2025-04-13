@@ -32,30 +32,4 @@ export function Edittext(event) {
 
   event.stopPropagation();
 }
-
-
-export let highestZIndex = 10;
-export function DragElement(elmnt) {
-  const draggableElements = document.querySelectorAll('.draggable');
-  highestZIndex = Math.max(
-    highestZIndex,
-    ...Array.from(draggableElements).map(
-      (el) => parseInt(window.getComputedStyle(el).zIndex) || 0
-    )
-  );
-  const sidebarButton = document.getElementById('sidebarexpand');
-  const sidebar = document.getElementById('sidebar');
-  const main = document.getElementById('main');
-
-  sidebarButton.style.zIndex = '1000';
-  sidebar.style.zIndex = '999';
-  main.style.zIndex = '998';
-  draggableElements.forEach((el) => {
-    if (el !== elmnt) {
-      el.style.zIndex = parseInt(el.style.zIndex) || 0;
-    }
-  });
-  elmnt.style.zIndex = (highestZIndex + 1).toString();
-  highestZIndex++;
-}
 </script>

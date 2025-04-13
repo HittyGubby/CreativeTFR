@@ -130,6 +130,7 @@ const clearSessionStorage = () => {
 
 async function capture() {
   try {
+    document.getElementById('control-panel').style.display = 'none';
     const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
     const track = stream.getVideoTracks()[0];
     const bitmap = await new ImageCapture(track).grabFrame();
@@ -146,6 +147,7 @@ async function capture() {
       URL.revokeObjectURL(url);
       track.stop();
     }, 'image/png');
+    document.getElementById('control-panel').style.display = '';
   } catch (err) {
     console.log(err);
   }

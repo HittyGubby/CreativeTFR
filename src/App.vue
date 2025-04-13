@@ -48,7 +48,7 @@ onMounted(() => {
     <SuperEvent class="window"></SuperEvent>
   </vue-draggable-resizable>
 
-  <Dialog v-model:visible="visible" :style="{ width: '300px', fontFamily: 'Cubic' }" header="控制面板">
+  <Dialog v-model:visible="visible" :style="{ width: '300px', fontFamily: 'Cubic' }" header="控制面板" id="control-panel">
     <Generic class="window"></Generic>
   </Dialog>
 
