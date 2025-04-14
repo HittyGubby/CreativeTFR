@@ -54,7 +54,7 @@
         </div>
         <div class="toggle-item">
           <Button label="截图" @click="capture" />
-          <Button label="清除缓存" @click="clearSessionStorage" severity="danger" />
+          <!--<Button label="清除缓存" @click="clearSessionStorage" severity="danger" />-->
         </div>
       </div>
       <!--
@@ -131,22 +131,25 @@ const clearSessionStorage = () => {
 async function capture() {
   try {
     document.getElementById('control-panel').style.display = 'none';
-    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-    const track = stream.getVideoTracks()[0];
-    const bitmap = await new ImageCapture(track).grabFrame();
-    const canvas = document.createElement('canvas');
-    canvas.width = bitmap.width;
-    canvas.height = bitmap.height;
-    canvas.getContext('2d').drawImage(bitmap, 0, 0);
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${new Date().toLocaleString("zh-CN")}.png`;
-      a.click();
-      URL.revokeObjectURL(url);
-      track.stop();
-    }, 'image/png');
+    alert('只能截取当前窗口的内容，请点击“确定”后选择要截取的窗口。\n手机端大概率无法使用此功能。');
+    setTimeout(async function () {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      const track = stream.getVideoTracks()[0];
+      const bitmap = await new ImageCapture(track).grabFrame();
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      canvas.getContext('2d').drawImage(bitmap, 0, 0);
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${new Date().toLocaleString("zh-CN")}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        track.stop();
+      }, 'image/png');
+    }, 500);
     document.getElementById('control-panel').style.display = '';
   } catch (err) {
     console.log(err);

@@ -16,16 +16,6 @@ let isDragging = false;
 onMounted(() => {
   document.getElementById('app').addEventListener('mousedown', (event) => {
     if (event.target === document.getElementById('app')) {
-      isDragging = false;
-    }
-  });
-
-  document.getElementById('app').addEventListener('mousemove', () => {
-    isDragging = true;
-  });
-
-  document.getElementById('app').addEventListener('mouseup', (event) => {
-    if (!isDragging && event.target === document.getElementById('app')) {
       visible.value = true;
     }
   });
