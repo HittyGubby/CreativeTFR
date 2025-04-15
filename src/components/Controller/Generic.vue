@@ -131,8 +131,8 @@ const clearSessionStorage = () => {
 async function capture() {
   try {
     document.getElementById('control-panel').style.display = 'none';
-    alert('只能截取当前窗口的内容，请点击“确定”后选择要截取的窗口。\n手机端大概率无法使用此功能。');
     setTimeout(async function () {
+      alert('只能截取当前窗口的内容，请点击“确定”后选择要截取的窗口。\n手机端大概率无法使用此功能。');
       const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
       const track = stream.getVideoTracks()[0];
       const bitmap = await new ImageCapture(track).grabFrame();
@@ -148,11 +148,12 @@ async function capture() {
         a.click();
         URL.revokeObjectURL(url);
         track.stop();
+        document.getElementById('control-panel').style.display = '';
       }, 'image/png');
     }, 500);
-    document.getElementById('control-panel').style.display = '';
   } catch (err) {
     console.log(err);
+    document.getElementById('control-panel').style.display = '';
   }
 }
 

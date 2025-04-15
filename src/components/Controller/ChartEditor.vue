@@ -35,10 +35,12 @@
                             <Button icon="pi pi-times" @click="cancelEdit(index)" severity="help"
                                 class=" p-button-danger" />
                         </template>
+                        <Button icon="pi pi-trash" @click="removeColor(index)" severity="danger" />
                     </div>
                 </div>
             </template>
         </draggable>
+        <Button label="添加颜色" icon="pi pi-plus" @click="addColor" class="add-color-button" />
     </div>
 </template>
 
@@ -128,6 +130,22 @@ export default {
             updateChart()
         }
 
+        const addColor = () => {
+            localData.value.push({
+                sequence: localData.value.length + 1,
+                backgroundColor: '#000000',
+                label: '<意识形态>',
+                data: 10,
+                editing: false
+            });
+            updateChart();
+        };
+
+        const removeColor = (index) => {
+            localData.value.splice(index, 1);
+            updateChart();
+        };
+
         return {
             rotation,
             localData,
@@ -136,7 +154,9 @@ export default {
             startEdit,
             saveEdit,
             cancelEdit,
-            onColorChange
+            onColorChange,
+            addColor,
+            removeColor
         }
     }
 }
@@ -221,9 +241,9 @@ export default {
 .label-container {
     display: flex;
     align-items: center;
-    min-width: 80px;
+    min-width: 120px;
     flex: 1;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .label-text {

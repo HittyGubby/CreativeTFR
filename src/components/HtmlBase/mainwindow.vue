@@ -141,7 +141,7 @@ export default {
       </div>
     </div>
   </div>
-  <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '580px', fontFamily: 'Cubic' }">
+  <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '600px', fontFamily: 'Cubic' }">
     <ChartEditor v-model="chartData" />
   </Dialog>
   <PicManager v-model:visible="picManagerVisible" :type="picManagerType" :targetId="picManagerTargetId"
