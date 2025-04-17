@@ -1,39 +1,7 @@
 <template>
 
   <div class="control-panel-container">
-    <!--<div class="left-panel">
-      <div class="preset-management">
-        <h3>预设管理</h3>
-        <div class="search-container">
-          <span class="p-input-icon-left">
-            <i class="pi pi-search" />
-            <InputText v-model="searchQuery" placeholder="搜索预设..." class="search-input" />
-          </span>
-        </div>
-        <div class="table-container">
-          <DataTable v-model:selection="selectedPresets" :value="filteredPresets" :scrollable="true"
-            scrollHeight="300px" class="p-datatable-sm" :rowClass="rowClass" @row-click="onPresetRowClick"
-            :reorderableRows="!searchQuery" @rowReorder="onRowReorder" :paginator="true" :rows="5"
-            :rowsPerPageOptions="[5, 10, 20]">
-            <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-            <Column rowReorder style="width: 3rem" :reorderable="!searchQuery"></Column>
-            <Column field="name" header="预设名称"></Column>
-            <Column field="saveTime" header="保存时间">
-              <template #body="slotProps">
-                {{ formatDate(slotProps.data.saveTime) }}
-              </template>
-</Column>
-</DataTable>
-<div class="action-buttons">
-  <Button icon="pi pi-plus" label="保存" @click="savePreset" />
-  <Button icon="pi pi-pencil" label="重命名" @click="showRenameDialog"
-    :disabled="!selectedPresets || selectedPresets.length !== 1" />
-  <Button icon="pi pi-trash" label="删除" @click="deletePresetv"
-    :disabled="!selectedPresets || selectedPresets.length === 0" severity="danger" />
-</div>
-</div>
-</div>
-</div>-->
+
     <div class="right-panel">
       <div class="window-controls">
         <h3>窗口控制</h3>
@@ -54,7 +22,7 @@
         </div>
         <div class="toggle-item">
           <Button label="截图" @click="capture" />
-          <!--<Button label="清除缓存" @click="clearSessionStorage" severity="danger" />-->
+          <Button label="清除缓存" @click="clearSessionStorage" severity="danger" />
         </div>
       </div>
       <!--
@@ -66,9 +34,42 @@
             <template #body="slotProps">
               <Button label="提升优先级" @click="increaseZIndex(slotProps.data.id)" />
             </template>
-          </Column>
-        </DataTable>
-      </div>-->
+</Column>
+</DataTable>
+</div>-->
+    </div>
+    <div class="left-panel">
+      <div class="preset-management">
+        <h3>预设管理</h3>
+        <div class="search-container">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search" />
+            <InputText v-model="searchQuery" placeholder="搜索预设..." class="search-input" />
+          </span>
+        </div>
+        <div class="table-container">
+          <DataTable v-model:selection="selectedPresets" :value="filteredPresets" :scrollable="true"
+            scrollHeight="300px" class="p-datatable-sm" :rowClass="rowClass" @row-click="onPresetRowClick"
+            :reorderableRows="!searchQuery" @rowReorder="onRowReorder" :paginator="true" :rows="5"
+            :rowsPerPageOptions="[5, 10, 20]">
+            <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+            <Column rowReorder style="width: 3rem" :reorderable="!searchQuery"></Column>
+            <Column field="name" header="预设名称"></Column>
+            <Column field="saveTime" header="保存时间">
+              <template #body="slotProps">
+                {{ formatDate(slotProps.data.saveTime) }}
+              </template>
+            </Column>
+          </DataTable>
+          <div class="action-buttons">
+            <Button icon="pi pi-plus" label="保存" @click="savePreset" />
+            <Button icon="pi pi-pencil" label="重命名" @click="showRenameDialog"
+              :disabled="!selectedPresets || selectedPresets.length !== 1" />
+            <Button icon="pi pi-trash" label="删除" @click="deletePresetv"
+              :disabled="!selectedPresets || selectedPresets.length === 0" severity="danger" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -98,6 +99,7 @@ import Column from 'primevue/column';
 import { useWindows } from '@/composables/useWindows';
 import { usePresetDB } from '@/composables/usePresetDB';
 import { formatDate } from '@/utils/format';
+import { GetData, SetData } from '@/components/index.vue';
 
 const { windows, draggable } = useWindows();
 const { getAllPresets, addPreset, deletePreset, updatePreset } = usePresetDB();
@@ -171,7 +173,7 @@ const savePreset = async () => {
 
   const presetData = {
     name: presetName,
-    html: document.body.innerHTML,
+    data: GetData(),
     saveTime: new Date()
   };
   const id = await addPreset(presetData);
@@ -181,13 +183,13 @@ const savePreset = async () => {
 const loadPreset = async (presetId) => {
   const preset = presets.value.find(p => p.id === presetId);
   if (preset) {
-    document.body.innerHTML = preset.html;
-    alert('预设已恢复！请刷新网页以完成加载。');
+    SetData(preset.data);
+    alert('注意：预设功能尚施工中，现只能加载文字');
   }
 };
 
 const onPresetRowClick = (event) => {
-  loadPreset(event.data.id); // Apply the preset when a row is clicked
+  loadPreset(event.data.id);
 };
 
 const renamePreset = async () => {
@@ -240,6 +242,7 @@ onMounted(async () => {
 
 .control-panel-container {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 

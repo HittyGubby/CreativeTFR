@@ -19,6 +19,7 @@ onMounted(() => {
       visible.value = true;
     }
   });
+
 });
 </script>
 
@@ -38,7 +39,7 @@ onMounted(() => {
     <SuperEvent class="window"></SuperEvent>
   </vue-draggable-resizable>
 
-  <Dialog v-model:visible="visible" :style="{ width: '300px', fontFamily: 'Cubic' }" header="控制面板" id="control-panel">
+  <Dialog v-model:visible="visible" :style="{ width: '450px', fontFamily: 'Cubic' }" header="控制面板" id="control-panel">
     <Generic class="window"></Generic>
   </Dialog>
 

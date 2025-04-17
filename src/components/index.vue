@@ -32,4 +32,29 @@ export function Edittext(event) {
 
   event.stopPropagation();
 }
+
+export function GetData() {
+  const data = {
+    textElements: []
+  };
+
+  document.querySelectorAll(':root .text').forEach(element => {
+    data.textElements.push({
+      id: element.id,
+      text: element.innerHTML
+    });
+  });
+
+  return data;
+}
+
+export function SetData(data) {
+  data.textElements.forEach(item => {
+    const element = document.getElementById(item.id);
+    if (element) {
+      element.innerHTML = item.text;
+    }
+  });
+
+}
 </script>

@@ -115,7 +115,7 @@ export default {
       <div id="piechartparent"
         style="position:absolute; top: 72px; left: 133px; z-index: 3;display: flex; justify-content: center; align-items: center;">
         <img src="/template/bck_shadow.png" style="position:absolute;scale: 0.6;z-index: 0;">
-        <Pie id="piechart"
+        <Pie class="piechart"
           style="width: 100px;height: 100px; border-radius: 50%;background:none; scale: 0.7;z-index: 4;"
           v-model="chartData" />
         <img src="/template/pol_piechart_overlay_63x63.png" style="position:absolute;scale: 0.9;z-index: 5;"
