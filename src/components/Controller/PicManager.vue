@@ -19,7 +19,12 @@
                             :rowsPerPageOptions="[10, 20, 50, 100]"
                             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageInput RowsPerPageDropdown "
                             currentPageReportTemplate="显示 {first} 到 {last} 条，共 {totalRecords} 条">
-                            <Column headerStyle="width: 3rem"></Column>
+                            <Column headerStyle="width: 4rem" field="preview" header="预览">
+                                <template #body="slotProps">
+                                    <img :src="getVanillaPicUrl(slotProps.data)" alt="预览"
+                                        style="max-width: 48px; max-height: 48px; object-fit: contain;" />
+                                </template>
+                            </Column>
                             <Column field="filename" header="文件名"></Column>
                         </DataTable>
                     </TabPanel>
@@ -47,6 +52,12 @@
                                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageInput RowsPerPageDropdown "
                                 currentPageReportTemplate="显示 {first} 到 {last} 条，共 {totalRecords} 条">
                                 <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+                                <Column headerStyle="width: 4rem" field="preview" header="预览">
+                                    <template #body="slotProps">
+                                        <img :src="slotProps.data.url" alt="预览"
+                                            style="max-width: 48px; max-height: 48px; object-fit: contain;" />
+                                    </template>
+                                </Column>
                                 <Column rowReorder style="width: 3rem" :reorderable="!searchQuery"></Column>
                                 <Column field="filename" header="文件名"></Column>
                                 <Column field="uploadTime" header="上传时间">
