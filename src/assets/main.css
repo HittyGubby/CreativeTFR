@@ -19,25 +19,6 @@
   src: url(/fonts/huangyouti.ttf) format("truetype");
 }
 
-input[type="checkbox"] {
-  background: url("/template/generic_checkbox_unchecked.png") no-repeat;
-  appearance: none;
-  background-size: 100%;
-  font-family: Cubic;
-  transition: 0.2s;
-  transition-timing-function: ease-in-out;
-  color: #ffff00;
-  font-size: 15px;
-  width: 22px;
-  height: 22px;
-  border: none;
-  vertical-align: bottom;
-}
-
-input[type="checkbox"]:checked {
-  background: url("/template/generic_checkbox_checked.png") no-repeat;
-  background-size: 100%;
-}
 
 label {
   font-family: Cubic;
@@ -45,4 +26,9 @@ label {
   font-size: 16px;
   width: 25px;
   height: 25px;
+  user-select: none;
+}
+
+*{
+  cursor: url(/template/embark.png), auto;
 }

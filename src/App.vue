@@ -1,47 +1,83 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { initApp } from './components/onload.vue';
-import MainWindow from './components/HtmlBase/mainwindow.vue';
-import Description from './components/HtmlBase/description.vue';
-import News from './components/HtmlBase/news.vue';
-import Sfx from './components/HtmlBase/sfx.vue';
-import Superevent from './components/HtmlBase/superevent.vue';
-import Generic from './components/Controller/Generic.vue';
-onMounted(() => { window.onload = initApp; });
-import { useWindows } from '@/composables/useWindows';
-var { draggable } = useWindows();
-var visible = ref(false);
-let isDragging = false;
+import { ref, onMounted } from "vue";
+import DraggableResizableVue from "vue-draggable-resizable";
+import MainWindow from "./components/HtmlBase/mainwindow.vue";
+import Description from "./components/HtmlBase/description.vue";
+import News from "./components/HtmlBase/news.vue";
+import Superevent from "./components/HtmlBase/superevent.vue";
+import Generic from "./components/Controller/Generic.vue";
+import Sfx from "./components/HtmlBase/sfx.vue";
+import { initApp } from "./utils/onload.js";
+import { mousePosition } from "./composables/useMousePosition.js";
+import { state } from "@/utils/state.js";
 
 onMounted(() => {
-  document.getElementById('app').addEventListener('mousedown', (event) => {
-    if (event.target === document.getElementById('app')) {
-      visible.value = true;
-    }
+  document.addEventListener("mousedown", (e) => {
+    mousePosition.down.x = e.clientX;
+    mousePosition.down.y = e.clientY;
   });
-
+  document.addEventListener("mouseup", (e) => {
+    mousePosition.up.x = e.clientX;
+    mousePosition.up.y = e.clientY;
+  });
+  initApp();
 });
+
+const settingsVisible = ref(false);
+const draggable = ref(false);
+
+let maxZIndex = ref(1);
+
+function bringToFront(windowName) {
+  maxZIndex.value++;
+  state.windows[windowName].zIndex = maxZIndex.value;
+}
+
+function openSettings() {
+  settingsVisible.value = true;
+}
 </script>
 
 <template>
-  <MainWindow></MainWindow>
+  <div id="app-container" @click.self="openSettings" style="width: 100vw; height: 100vh;">
+    <DraggableResizableVue v-show="state.windows.main.visible" v-model:active="state.windows.main.active"
+      :z="state.windows.main.zIndex" @activated="bringToFront('main')" class="window" :draggable=false>
+      <MainWindow />
+    </DraggableResizableVue>
+    <DraggableResizableVue v-show="state.windows.description.visible" v-model:x="state.windows.description.x"
+      v-model:y="state.windows.description.y" v-model:w="state.windows.description.w"
+      v-model:h="state.windows.description.h" v-model:active="state.windows.description.active"
+      :z="state.windows.description.zIndex" @activated="bringToFront('description')" class="window"
+      :draggable="draggable" :drag-cancel="'.non-draggable'">
+      <Description />
+    </DraggableResizableVue>
 
-  <vue-draggable-resizable id="Description" :draggable="draggable" style="position: absolute; height: min-content;"
-    :w="320" :x="12" :y="255">
-    <Description class="window"></Description>
-  </vue-draggable-resizable>
+    <DraggableResizableVue v-show="state.windows.news.visible" v-model:x="state.windows.news.x"
+      v-model:y="state.windows.news.y" v-model:w="state.windows.news.w" v-model:h="state.windows.news.h"
+      v-model:active="state.windows.news.active" :z="state.windows.news.zIndex" @activated="bringToFront('news')"
+      class="window" :draggable="draggable" :drag-cancel="'.non-draggable'">
+      <News :style="{ scale: 0.8 }" />
+    </DraggableResizableVue>
 
-  <vue-draggable-resizable id="News" :draggable="draggable" :w="713" :x="-30" :y="600" :h="935">
-    <News class="window"></News>
-  </vue-draggable-resizable>
+    <DraggableResizableVue v-show="state.windows.superevent.visible" v-model:x="state.windows.superevent.x"
+      v-model:y="state.windows.superevent.y" v-model:w="state.windows.superevent.w"
+      v-model:h="state.windows.superevent.h" v-model:active="state.windows.superevent.active"
+      :z="state.windows.superevent.zIndex" @activated="bringToFront('superevent')" class="window" :draggable="draggable"
+      :drag-cancel="'.non-draggable'" :style="{ scale: 0.8 }">
+      <Superevent />
+    </DraggableResizableVue>
 
-  <vue-draggable-resizable id="Superevent" :draggable="draggable" :w="1001" :x="530" :y="-930" :h="639">
-    <Superevent class="window"></Superevent>
-  </vue-draggable-resizable>
+    <Dialog v-model:visible="settingsVisible" :style="{ minHeight: '60%', fontFamily: 'Cubic' }" :modal="true"
+      header="控制面板" id="control-panel">
+      <Generic :windows="state.windows" v-model:draggable="draggable" />
+    </Dialog>
 
-  <Dialog v-model:visible="visible" :style="{ width: '450px', fontFamily: 'Cubic' }" header="控制面板" id="control-panel">
-    <Generic class="window"></Generic>
-  </Dialog>
-
-  <Sfx></Sfx>
+    <Sfx />
+  </div>
 </template>
+
+<style>
+.window {
+  position: absolute;
+}
+</style>

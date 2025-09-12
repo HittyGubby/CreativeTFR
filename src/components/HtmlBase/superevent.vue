@@ -1,59 +1,45 @@
-<script>
-import { ref, onMounted } from 'vue';
-import PicManager from '@/components/Controller/PicManager.vue';
+<script setup>
+import { ref, onMounted } from "vue";
+import { mousePosition } from "../../composables/useMousePosition.js";
 
-export default {
-  components: { PicManager },
-  setup() {
-    const picManagerVisible = ref(false);
-    const picManagerType = ref('');
-    const picManagerTargetId = ref('');
-    const picManagerResizable = ref(false);
-    let zIndexCounter = 10;
+const picManagerVisible = ref(false);
+const picManagerType = ref("");
+const picManagerTargetId = ref("");
+const picManagerResizable = ref(false);
+let zIndexCounter = 10;
 
-    const updatePicture = ({ id, url, scale }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.src = url ? url : element.src;
-        if (scale !== undefined) {
-          element.style.scale = scale;
-        }
-      }
-    };
+const handlePicClick = (event) => {
+  const distance = Math.sqrt(
+    Math.pow(mousePosition.up.x - mousePosition.down.x, 2) +
+    Math.pow(mousePosition.up.y - mousePosition.down.y, 2)
+  );
 
-    const handlePicClick = (event) => {
-      const target = event.target;
-      if (target.dataset.modifiable === 'true') {
-        picManagerType.value = target.dataset.type;
-        picManagerTargetId.value = target.dataset.targetId;
-        picManagerResizable.value = target.dataset.resizable === 'true';
-        picManagerVisible.value = true;
-      }
-    };
-
-    const prioritizeWindow = (event) => {
-      const target = event.target.closest('.draggable');
-      if (target) {
-        zIndexCounter++;
-        target.style.zIndex = zIndexCounter;
-      }
-    };
-
-    onMounted(() => {
-      document.addEventListener('click', handlePicClick);
-      const windowElement = document.getElementById('superwindow');
-      windowElement.addEventListener('mousedown', prioritizeWindow);
-    });
-
-    return {
-      picManagerVisible,
-      picManagerType,
-      picManagerTargetId,
-      picManagerResizable,
-      updatePicture
-    };
+  if (distance > 5) {
+    return;
   }
-}
+
+  const target = event.target;
+  if (target.dataset.modifiable === "true") {
+    picManagerType.value = target.dataset.type;
+    picManagerTargetId.value = target.dataset.targetId;
+    picManagerResizable.value = target.dataset.resizable === "true";
+    picManagerVisible.value = true;
+  }
+};
+
+const prioritizeWindow = (event) => {
+  const target = event.target.closest(".draggable");
+  if (target) {
+    zIndexCounter++;
+    target.style.zIndex = zIndexCounter;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handlePicClick);
+  const windowElement = document.getElementById("superwindow");
+  windowElement.addEventListener("mousedown", prioritizeWindow);
+});
 </script>
 <template>
   <div class="draggable" id="superwindow" style="position: absolute; z-index: 4;">

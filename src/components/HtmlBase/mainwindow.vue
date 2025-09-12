@@ -1,65 +1,49 @@
-<script>
-import Pie from './piechart.vue';
-import ChartEditor from '../Controller/ChartEditor.vue';
-import { ref, onMounted } from 'vue';
-import PicManager from '@/components/Controller/PicManager.vue';
+<script setup>
+import Pie from "./piechart.vue";
+import ChartEditor from "../Controller/ChartEditor.vue";
+import { ref, onMounted } from "vue";
+import PicManager from "@/components/Controller/PicManager.vue";
+import { mousePosition } from "../../composables/useMousePosition.js";
+import { state } from "@/utils/state.js";
 
-export default {
-  components: { Pie, ChartEditor, PicManager },
-  setup() {
-    const editorVisible = ref(false);
-    const picManagerVisible = ref(false);
-    const picManagerType = ref('');
-    const picManagerTargetId = ref('');
-    const picManagerResizable = ref(false);
-    const chartData = ref({
-      labels: ['争取社会主义和解放党（反修派）', '争取社会主义和解放党（温和派）', '美国民主社会主义者', '民主党（进步派）', '民主党（自由派）', '自由意志党', '共和党（保守派）', '共和党（民粹派）', '美国武装力量', '爱国者阵线', '民族社会主义运动'],
-      datasets: [{
-        data: [0, 1, 3, 8, 40, 5, 42, 1, 0, 0, 0],
-        backgroundColor: ['#640000', '#990000', '#BD3643', '#FF0A66', '#FFAA1E', '#E1D700', '#0A0FFF', '#7C7C7C', '#050505', '#7B542E', '#4E3939'],
-        borderWidth: 0,
-        spacing: 0
-      }],
-      options: {
-        rotation: 50
-      }
-    });
+const editorVisible = ref(false);
+const picManagerVisible = ref(false);
+const picManagerType = ref("");
+const picManagerTargetId = ref("");
+const picManagerResizable = ref(false);
 
-    const updatePicture = ({ id, url, scale }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.src = url ? url : element.src;
-        if (scale !== undefined) {
-          element.style.scale = scale;
-        }
-      }
-    };
-
-    const handlePicClick = (event) => {
-      const target = event.target;
-      if (target.dataset.modifiable === 'true') {
-        picManagerType.value = target.dataset.type;
-        picManagerTargetId.value = target.dataset.targetId;
-        picManagerResizable.value = target.dataset.resizable === 'true';
-        picManagerVisible.value = true;
-      }
-    };
-
-    onMounted(() => {
-      document.addEventListener('click', handlePicClick);
-    });
-
-    return {
-      chartData,
-      editorVisible,
-      picManagerVisible,
-      picManagerType,
-      picManagerTargetId,
-      picManagerResizable,
-      updatePicture
-    };
+const updatePicture = ({ id, url, scale }) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.src = url ? url : element.src;
+    if (scale !== undefined) {
+      element.style.scale = scale;
+    }
   }
-}
+};
+
+const handlePicClick = (event) => {
+  const distance = Math.sqrt(
+    Math.pow(mousePosition.up.x - mousePosition.down.x, 2) +
+    Math.pow(mousePosition.up.y - mousePosition.down.y, 2)
+  );
+
+  if (distance > 5) {
+    return;
+  }
+
+  const target = event.target;
+  if (target.dataset.modifiable === "true") {
+    picManagerType.value = target.dataset.type;
+    picManagerTargetId.value = target.dataset.targetId;
+    picManagerResizable.value = target.dataset.resizable === "true";
+    picManagerVisible.value = true;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handlePicClick);
+});
 </script>
 
 <template>
@@ -117,7 +101,7 @@ export default {
         <img src="/template/bck_shadow.png" style="position:absolute;scale: 0.6;z-index: 0;">
         <Pie class="piechart"
           style="width: 100px;height: 100px; border-radius: 50%;background:none; scale: 0.7;z-index: 4;"
-          v-model="chartData" />
+          v-model="state.chartData" />
         <img src="/template/pol_piechart_overlay_63x63.png" style="position:absolute;scale: 0.9;z-index: 5;"
           @click="editorVisible = true">
       </div>
@@ -142,7 +126,7 @@ export default {
     </div>
   </div>
   <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '600px', fontFamily: 'Cubic' }">
-    <ChartEditor v-model="chartData" />
+    <ChartEditor v-model="state.chartData" />
   </Dialog>
   <PicManager v-model:visible="picManagerVisible" :type="picManagerType" :targetId="picManagerTargetId"
     :resizable="picManagerResizable" @update:pic="updatePicture" />
