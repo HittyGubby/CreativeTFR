@@ -125,7 +125,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <Dialog v-model:visible="editorVisible" modal header="饼图编辑" :style="{ width: '600px', fontFamily: 'Cubic' }">
+  <Dialog v-model:visible="editorVisible" header="饼图编辑" :style="{ width: '600px', fontFamily: 'Cubic' }">
     <ChartEditor v-model="state.chartData" />
   </Dialog>
   <PicManager v-model:visible="picManagerVisible" :type="picManagerType" :targetId="picManagerTargetId"

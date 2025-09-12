@@ -67,8 +67,8 @@ function openSettings() {
       <Superevent />
     </DraggableResizableVue>
 
-    <Dialog v-model:visible="settingsVisible" :style="{ minHeight: '60%', fontFamily: 'Cubic' }" :modal="true"
-      header="控制面板" id="control-panel">
+    <Dialog v-model:visible="settingsVisible" :style="{ minHeight: '60%', fontFamily: 'Cubic' }" header="控制面板"
+      id="control-panel">
       <Generic :windows="state.windows" v-model:draggable="draggable" />
     </Dialog>
 
