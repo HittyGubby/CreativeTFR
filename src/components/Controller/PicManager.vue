@@ -1,6 +1,7 @@
 <template>
-    <Dialog v-model:visible="dialogVisible" :style="{ width: '70%', maxWidth: '90%', fontFamily: 'Aldrich, FZRui' }"
-        :header="'图片管理 - ' + type" class="pic-manager-dialog" :closable="true">
+    <Dialog v-model:visible="dialogVisible"
+        :style="{ width: '70%', maxWidth: '90%', fontFamily: 'Cubic', opacity: 0.9 }" :header="'图片管理 - ' + type"
+        class="pic-manager-dialog" :closable="true">
         <div class="pic-manager-container">
             <div v-if="!type" class="no-type-message">请先点击要修改的图片</div>
             <template v-else>
@@ -96,7 +97,7 @@
         </div>
     </Dialog>
     <Dialog v-model:visible="renameDialogVisible" header="重命名图片" :modal="true"
-        :style="{ width: '400px', fontFamily: 'Aldrich, FZRui' }">
+        :style="{ width: '400px', fontFamily: 'Cubic' }">
         <div class="rename-container">
             <span class="p-float-label">
                 <InputText v-model="newFilename" class="w-full" size="small" />

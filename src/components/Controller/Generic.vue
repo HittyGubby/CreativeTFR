@@ -56,7 +56,7 @@
   </div>
 
   <Dialog v-model:visible="renameDialogVisible" header="重命名预设" :modal="true"
-    :style="{ width: '400px', fontFamily: 'Aldrich, FZRui' }">
+    :style="{ width: '400px', fontFamily: 'Cubic' }">
     <div class="rename-container">
       <span class="p-float-label">
         <label>新预设名称</label>

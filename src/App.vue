@@ -4,6 +4,7 @@ import DraggableResizableVue from "vue-draggable-resizable";
 import MainWindow from "./components/HtmlBase/mainwindow.vue";
 import Description from "./components/HtmlBase/description.vue";
 import News from "./components/HtmlBase/news.vue";
+import event from "./components/HtmlBase/event.vue";
 import Superevent from "./components/HtmlBase/superevent.vue";
 import Generic from "./components/Controller/Generic.vue";
 import Sfx from "./components/HtmlBase/sfx.vue";
@@ -65,6 +66,12 @@ function openSettings() {
       :z="state.windows.superevent.zIndex" @activated="bringToFront('superevent')" class="window" :draggable="draggable"
       :drag-cancel="'.non-draggable'" :style="{ scale: 0.8 }">
       <Superevent />
+    </DraggableResizableVue>
+    <DraggableResizableVue v-show="state.windows.event.visible" v-model:x="state.windows.event.x"
+      v-model:y="state.windows.event.y" v-model:w="state.windows.event.w" v-model:h="state.windows.event.h"
+      v-model:active="state.windows.event.active" :z="state.windows.event.zIndex" @activated="bringToFront('event')"
+      class="window" :draggable="draggable" :drag-cancel="'.non-draggable'" :style="{ scale: 0.8 }">
+      <Event />
     </DraggableResizableVue>
 
     <Dialog v-model:visible="settingsVisible" :style="{ minHeight: '60%', fontFamily: 'Cubic' }" header="控制面板"
