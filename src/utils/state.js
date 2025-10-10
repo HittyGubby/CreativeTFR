@@ -16,6 +16,56 @@ export const state = reactive({
       rotation: 90,
     },
   },
+  spiritPictures: [
+    {
+      id: 1,
+      url: "/preset/USA_USA_america_first.png",
+      filename: "USA_USA_america_first",
+      scale: 1.0
+    },
+    {
+      id: 2,
+      url: "/preset/USA_USA_constitutional_protections.png",
+      filename: "USA_USA_constitutional_protections",
+      scale: 1.0
+    },
+    {
+      id: 3,
+      url: "/preset/USA_USA_immigration.png",
+      filename: "USA_USA_immigration",
+      scale: 1.0
+    },
+    {
+      id: 4,
+      url: "/preset/USA_USA_political_division.png",
+      filename: "USA_USA_political_division",
+      scale: 1.0
+    },
+    {
+      id: 5,
+      url: "/preset/USA_USA_political_establishment.png",
+      filename: "USA_USA_political_establishment",
+      scale: 1.0
+    },
+    {
+      id: 6,
+      url: "/preset/USA_USA_the_trump_economy.png",
+      filename: "USA_USA_the_trump_economy",
+      scale: 1.0
+    },
+    {
+      id: 7,
+      url: "/preset/USA_USA_second_ammendment.png",
+      filename: "USA_USA_second_ammendment",
+      scale: 1.0
+    },
+    {
+      id: 8,
+      url: "/preset/USA_USA_world_police.png",
+      filename: "USA_USA_world_police",
+      scale: 1.0
+    }
+  ],
   windows: {
     main: {
       name: "主窗口",
@@ -30,7 +80,7 @@ export const state = reactive({
     description: {
       name: "人物介绍",
       x: 6,
-      y: 250,
+      y: 420,
       w: 320,
       h: 400,
       zIndex: 1,
@@ -49,11 +99,11 @@ export const state = reactive({
     },
     superevent: {
       name: "超事件",
-      x: 10,
+      x: 420,
       y: 740,
       w: 1,
       h: 1,
-      zIndex: 1,
+      zIndex: 2,
       visible: true,
       active: false,
     },
@@ -61,6 +111,16 @@ export const state = reactive({
       name: "事件",
       x: 1300,
       y: 100,
+      w: 1,
+      h: 1,
+      zIndex: 1,
+      visible: true,
+      active: false,
+    },
+    spirit: {
+      name: "国家精神",
+      x: 5,
+      y: 240,
       w: 1,
       h: 1,
       zIndex: 1,

@@ -4,13 +4,14 @@ import DraggableResizableVue from "vue-draggable-resizable";
 import MainWindow from "./components/HtmlBase/mainwindow.vue";
 import Description from "./components/HtmlBase/description.vue";
 import News from "./components/HtmlBase/news.vue";
-import event from "./components/HtmlBase/event.vue";
+import Event from "./components/HtmlBase/event.vue";
 import Superevent from "./components/HtmlBase/superevent.vue";
 import Generic from "./components/Controller/Generic.vue";
-import Sfx from "./components/HtmlBase/sfx.vue";
+import Spirit from "./components/HtmlBase/spirit.vue";
 import { initApp } from "./utils/onload.js";
 import { mousePosition } from "./composables/useMousePosition.js";
 import { state } from "@/utils/state.js";
+import { Howl } from "howler";
 
 onMounted(() => {
   document.addEventListener("mousedown", (e) => {
@@ -37,6 +38,20 @@ function bringToFront(windowName) {
 function openSettings() {
   settingsVisible.value = true;
 }
+
+const handleClose = () => {
+  new Howl({
+    src: ["/sfx/click_window_close.wav"],
+    volume: 1,
+  }).play();
+};
+
+const handleShow = () => {
+  new Howl({
+    src: ["/sfx/click_window_open.wav"],
+    volume: 1,
+  }).play();
+};
 </script>
 
 <template>
@@ -73,13 +88,16 @@ function openSettings() {
       class="window" :draggable="draggable" :drag-cancel="'.non-draggable'" :style="{ scale: 0.8 }">
       <Event />
     </DraggableResizableVue>
-
+    <DraggableResizableVue v-show="state.windows.spirit.visible" v-model:x="state.windows.spirit.x"
+      v-model:y="state.windows.spirit.y" v-model:w="state.windows.spirit.w" v-model:h="state.windows.spirit.h"
+      v-model:active="state.windows.spirit.active" :z="state.windows.spirit.zIndex" @activated="bringToFront('spirit')"
+      class="window" :draggable="draggable" :drag-cancel="'.non-draggable'">
+      <Spirit />
+    </DraggableResizableVue>
     <Dialog v-model:visible="settingsVisible" :style="{ minHeight: '60%', fontFamily: 'Cubic' }" header="控制面板"
-      id="control-panel">
+      id="control-panel" @hide="handleClose" @show="handleShow">
       <Generic :windows="state.windows" v-model:draggable="draggable" />
     </Dialog>
-
-    <Sfx />
   </div>
 </template>
 
