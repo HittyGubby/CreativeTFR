@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CreativeTFR</title>
-  </head>
-  <body style="background-color: rgb(11, 0, 18)">
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreativeTFR</title>
+</head>
+
+<body style="background-color: rgb(11, 0, 18)">
+  <button style="position: absolute;left: 200px;top: 100px;"
+    onclick="localStorage.clear();location.reload()">如果你看到我，估计是网站又崩了<br>点我清除缓存，要是还不行请上报bug</button>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
