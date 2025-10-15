@@ -64,7 +64,7 @@ export const state = reactive({
       url: "/preset/USA_USA_world_police.png",
       filename: "USA_USA_world_police",
       scale: 1.0
-    }
+    },
   ],
   windows: {
     main: {

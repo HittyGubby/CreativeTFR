@@ -117,7 +117,6 @@ onMounted(() => {
       position: 'absolute',
       top: `${190 + tileCount * tileHeight}px`,
       left: '130px',
-      fontWeight: 'bold',
       transition: '0.2s',
       background: 'url(/template/news/event_option_entry.png) no-repeat', border: 'none', width: '352px',
       height: '48px', fontFamily: 'OldTypeNr, FZRui', fontSize: '18px', color: '#FFFFFF'

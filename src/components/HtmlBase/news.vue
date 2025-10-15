@@ -51,7 +51,7 @@ onMounted(() => {
         data-resizable="false" data-target-id="newspic">
     </div>
     <button id="newsbutton" class="button text"
-      style="position:absolute; top: 700px; left: 180px;transition: 0.2s; background: url('/template/news/event_option_entry.png') no-repeat; border: none; width: 352px; height: 48px; font-family:electrolize,FZRui;font-size: 18px;color: #ffffff; font-weight: bold;">骨肉再次相残。</button>
+      style="position:absolute; top: 700px; left: 180px;transition: 0.2s; background: url('/template/news/event_option_entry.png') no-repeat; border: none; width: 352px; height: 48px; font-family:electrolize,FZRui;font-size: 18px;color: #ffffff;">骨肉再次相残。</button>
     <div
       style="position:absolute;display: flex; left: 100px; top:120px; justify-content: center; align-items: center; inline-size: 500px;">
       <p id="newstitle" class="text"
