@@ -70,7 +70,7 @@ const handleShow = () => {
         <img id="flag-overlay" src="/template/flag_overlay.png" data-modifiable="true" data-type="flag"
           data-resizable="false" data-target-id="flagpic"
           :style="{ position: 'absolute', top: '0', left: '0', height: 'inherit', width: 'inherit', scale: 1.3, zIndex: 1 }" />
-        <img id="flagpic" class="pic" src="/preset/USA.png"
+        <img id="flagpic" src="/preset/USA.png"
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
       <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">
@@ -78,7 +78,7 @@ const handleShow = () => {
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
       <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">
-        <img id="leaderpic" class="portrait-overlay" src="/preset/USA_donald_trump5.png"
+        <img id="leaderpic" class="pic" src="/preset/USA_donald_trump5.png"
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
     </div>
@@ -88,13 +88,13 @@ const handleShow = () => {
       <img src="/template/diplo_top_bg_diplo_tab.png" style="position: absolute;z-index: 2; left: 125px; top: 76px;">
       <div
         style="position:absolute; top: 42px; left: 177px; z-index: 3;display: flex; justify-content: center; align-items: center;">
-        <img id="ideologypic" src="/preset/right_populism_USA.png" data-modifiable="true" data-type="ideology"
-          data-resizable="true" data-initial-scale="1" :style="{ position: 'absolute', scale: 1 }"
+        <img id="ideologypic" class="pic" src="/preset/right_populism_USA.png" data-modifiable="true"
+          data-type="ideology" data-resizable="true" data-initial-scale="1" :style="{ position: 'absolute', scale: 1 }"
           data-target-id="ideologypic" />
       </div>
       <div
         style="position:absolute; top: 40px; left: 485px; z-index: 3;display: flex; justify-content: center; align-items: center;">
-        <img id="factionpic" src="/preset/GFX_NATO_Member.png" data-modifiable="true" data-type="faction"
+        <img id="factionpic" class="pic" src="/preset/GFX_NATO_Member.png" data-modifiable="true" data-type="faction"
           data-resizable="true" data-initial-scale="1" :style="{ position: 'absolute', scale: 1 }"
           data-target-id="factionpic" />
       </div>
@@ -108,8 +108,9 @@ const handleShow = () => {
       </div>
       <div
         style="position:absolute; top: 202px; left: 182px; z-index: 5;display: flex; justify-content: center; align-items: center;">
-        <img id="focuspic" src="/preset/goal_unknown.png" data-modifiable="true" data-type="focus" data-resizable="true"
-          data-initial-scale="0.9" :style="{ position: 'absolute', scale: 0.9 }" data-target-id="focuspic" />
+        <img id="focuspic" class="pic" src="/preset/goal_unknown.png" data-modifiable="true" data-type="focus"
+          data-resizable="true" data-initial-scale="0.9" :style="{ position: 'absolute', scale: 0.9 }"
+          data-target-id="focuspic" />
       </div>
       <div id="piechartparent"
         style="position:absolute; top: 72px; left: 133px; z-index: 3;display: flex; justify-content: center; align-items: center;">
