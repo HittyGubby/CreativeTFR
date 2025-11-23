@@ -58,7 +58,7 @@ onMounted(() => {
         第二次美国内战</p>
     </div>
     <span id="supermotto" class="text"
-      style="text-shadow: 1px 1px 2px black; position: absolute;left:210px; top:440px;z-index: 5; color: #cccccc;inline-size: 580px; font-family: Type; font-size: 18px;font-family:Cubic; text-align: center;white-space: pre-line; letter-spacing: -2px;">
+      style="text-shadow: 1px 1px 2px black; position: absolute;left:210px; top:440px;z-index: 5; color: #cccccc;inline-size: 580px; font-family: Type; font-size: 18px;font-family:Cubic; text-align: center;white-space: pre-line;">
       “如果毁灭是我们的命运，我们必须自己成为它的创造者和终结者。作为一个自由人的国家，我们将永远活着，或者自我灭亡。”
       <br />
       - 亚伯拉罕·林肯

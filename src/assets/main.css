@@ -18,6 +18,10 @@
   font-family: huangyouti;
   src: url(/fonts/huangyouti.ttf) format("truetype");
 }
+@font-face {
+  font-family: OldTypeNr;
+  src: url(/fonts/OldTyperNr.ttf) format("truetype");
+}
 
 
 label {

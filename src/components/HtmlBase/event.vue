@@ -119,7 +119,7 @@ onMounted(() => {
       left: '130px',
       transition: '0.2s',
       background: 'url(/template/news/event_option_entry.png) no-repeat', border: 'none', width: '352px',
-      height: '48px', fontFamily: 'OldTypeNr, FZRui', fontSize: '18px', color: '#FFFFFF'
+      height: '48px', fontFamily: 'electrolize,FZRui', fontSize: '18px', color: '#FFFFFF'
     }">
       暴乱解决不了任何问题！
     </button>
@@ -144,7 +144,7 @@ onMounted(() => {
 
     <span ref="eventBodyRef" id="eventbody" class="text"
       style="
-              font-family: OldTypeNr, FZRui;
+              font-family: electrolize,FZRui;
               position: absolute;
               left: 43px;
               top: 120px;
