@@ -70,7 +70,7 @@ const handleShow = () => {
         <img id="flag-overlay" src="/template/flag_overlay.png" data-modifiable="true" data-type="flag"
           data-resizable="false" data-target-id="flagpic"
           :style="{ position: 'absolute', top: '0', left: '0', height: 'inherit', width: 'inherit', scale: 1.3, zIndex: 1 }" />
-        <img id="flagpic" src="/preset/USA.png"
+        <img id="flagpic" src="/preset/USA.png" class="pic"
           style="position:absolute; top:0; left:0; height: inherit; width: inherit;">
       </div>
       <div style="position:absolute; top: 79px; left: 7px; height: 160px; width: 120px; z-index: 0;">

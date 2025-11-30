@@ -18,7 +18,7 @@
 
 3. 编译：`npm run build`
 
-4. 下载TFR素材[数据库](http://997779.xyz/share/TFRdata.zip) **(解压后1.5GB)**
+4. 下载TFR素材[数据库](http://997779.best/share/TFRdata.zip) **(解压后1.5GB)**
 
 5. 将其解压到dist/data文件夹
 
